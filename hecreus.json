@@ -1,0 +1,129 @@
+{
+    "Name": "Hecreus G'hen",
+    "Attributes": [
+        {
+            "Name": "Strength",
+            "Base": "",
+            "Species": 6,
+            "Character": 0,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Dexterity",
+            "Base": "",
+            "Species": 6,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Perception",
+            "Base": "",
+            "Species": 6,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Knowledge",
+            "Base": "",
+            "Species": 6,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Mechanical",
+            "Base": "",
+            "Species": 6,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Technical",
+            "Base": "",
+            "Species": 6,
+            "Character": 6,
+            "Misc": 0,
+            "Advancement": 0
+        }
+    ],
+    "Skills": [
+        {
+            "Name": "Stamina",
+            "Base": "Strength",
+            "Species": 0,
+            "Character": 1,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Blaster",
+            "Base": "Dexterity",
+            "Species": 0,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Gambling",
+            "Base": "Perception",
+            "Species": 0,
+            "Character": 2,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Cultures",
+            "Base": "Knowledge",
+            "Species": 0,
+            "Character": 6,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Planetary Systems",
+            "Base": "Knowledge",
+            "Species": 0,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Musical Instrument Operation",
+            "Base": "Mechanical",
+            "Species": 3,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "(Fine motor skills)",
+            "Base": "Mechanical",
+            "Species": 3,
+            "Character": 0,
+            "Misc": 0,
+            "Advancement": 0
+        },
+        {
+            "Name": "Musical Instrument Repair",
+            "Base": "Technical",
+            "Species": 0,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        }
+    ],
+    "Specializations": [
+        {
+            "Name": "Synth Repair",
+            "Base": "Musical Instrument Repair",
+            "Species": 0,
+            "Character": 3,
+            "Misc": 0,
+            "Advancement": 0
+        }
+    ]
+}

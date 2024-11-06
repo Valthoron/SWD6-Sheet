@@ -1,0 +1,88 @@
+body {
+    font-family: 'Tw Cen MT Condensed';
+    font-weight: bolder;
+    font-size: 19pt;
+    color: white;
+    background-color: rgb(64, 64, 64);
+}
+
+.stat-view {
+    width: 450px;
+}
+
+.stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 20px;
+    font-size: 20pt;
+    line-height: 36px;
+    box-shadow: 0px 1px rgb(128, 128, 128) inset;
+}
+
+.stat-row-name {
+    max-width: 350px
+}
+
+.stat-row-name-skill {
+
+    font-size: 18pt;
+    font-weight: normal;
+}
+
+.stat-row-name-spec {
+    font-size: 16pt;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.stat-row-value {
+    margin-left: auto;
+}
+
+.stat-modifier-row {
+    display: flex;
+    width: 100%;
+    font-size: 14pt;
+    font-weight: normal;
+    line-height: 36px;
+}
+
+.stat-modifier-row-name {
+    margin-left: auto;
+    margin-right: 30px;
+    font-family: 'Segoe UI';
+    font-size: 10pt;
+    font-weight: normal;
+}
+
+.stat-modifier-row-buttons {
+    margin-left: 0px;
+    margin-right: 30px;
+}
+
+.stat-modifier-row-buttons button {
+    font-family: inherit;
+    font-weight: 800;
+    color: black;
+    background-color: rgb(255, 140, 0);
+    border: 0px;
+    width: 30px;
+    height: 25px;
+}
+
+.stat-modifier-row-buttons button:hover {
+    background-color: rgb(255, 165, 0);
+}
+
+.stat-modifier-row-buttons button:active {
+    background-color: rgb(255, 190, 0);
+}
+
+.stat-modifier-row-value {
+    margin-left: 0px;
+}
+
+.template-container {
+    display: none;
+}
