@@ -1,5 +1,7 @@
+@import url('fonts.css');
+
 body {
-    font-family: 'Tw Cen MT Condensed';
+    font-family: 'Tw Cen MT';
     font-weight: bolder;
     font-size: 19pt;
     color: white;
