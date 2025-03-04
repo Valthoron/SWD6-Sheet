@@ -20,8 +20,8 @@ class ModeHandler {
     switchMode(mode) {
         if (this.currentMode === mode) return;
 
-        this.buttons[this.currentMode]?.classList.remove('active');
-        this.buttons[mode].classList.add('active');
+        this.buttons[this.currentMode]?.classList.remove('navbar__button--active');
+        this.buttons[mode].classList.add('navbar__button--active');
 
         // Set mode
         this.currentMode = mode;

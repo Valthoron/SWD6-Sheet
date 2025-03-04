@@ -29,28 +29,27 @@ body {
     z-index: 1000;
 }
 
-.navbar-mode-buttons {
+.navbar__mode-buttons {
     display: flex;
     gap: 10px;
     margin-right: 10px;
 }
 
-.navbar-button {
+.navbar__button {
     background-color: #555;
-    border-radius: 4px 4px 10px 0;
-    border-radius: 4px;
     border: none;
+    border-radius: 4px;
     color: white;
     cursor: pointer;
     font-weight: bold;
     padding: 8px 16px;
 }
 
-.navbar-button:hover {
+.navbar__button:hover {
     background-color: #666;
 }
 
-.navbar-button.active {
+.navbar__button--active {
     background-color: #007bff;
 }
 
@@ -71,22 +70,22 @@ body {
     width: 100%;
 }
 
-.stat-row-name {
+.stat-row__name {
     max-width: 350px
 }
 
-.stat-row-name-skill {
+.stat-row__name__skill {
     font-size: 18pt;
     font-weight: normal;
 }
 
-.stat-row-name-spec {
+.stat-row__name__spec {
     font-size: 16pt;
     font-style: italic;
     font-weight: normal;
 }
 
-.stat-row-value {
+.stat-row__value {
     margin-left: auto;
 }
 
@@ -98,7 +97,7 @@ body {
     width: 100%;
 }
 
-.stat-modifier-row-name {
+.stat-modifier-row__name {
     font-family: 'Segoe UI';
     font-size: 10pt;
     font-weight: normal;
@@ -106,12 +105,12 @@ body {
     margin-right: 30px;
 }
 
-.stat-modifier-row-buttons {
+.stat-modifier-row__buttons {
     margin-left: 0px;
     margin-right: 30px;
 }
 
-.stat-modifier-row-buttons button {
+.stat-modifier-row__buttons button {
     background-color: rgb(255, 140, 0);
     border: 0px;
     color: black;
@@ -121,20 +120,23 @@ body {
     width: 30px;
 }
 
-.stat-modifier-row-buttons button:hover {
+.stat-modifier-row__buttons button:hover {
     background-color: rgb(255, 165, 0);
 }
 
-.stat-modifier-row-buttons button:active {
+.stat-modifier-row__buttons button:active {
     background-color: rgb(255, 190, 0);
 }
 
-.stat-modifier-row-value {
+.stat-modifier-row__value {
     margin-left: 0px;
     text-align: left;
     width: 70px;
 }
 
+/*
+ ********** Mode-based Display **********
+ */
 body[mode="view"] .stat-modifier-row {
     display: none;
 }

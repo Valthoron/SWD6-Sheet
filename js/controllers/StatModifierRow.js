@@ -1,10 +1,10 @@
 class StatModifierRow extends View {
     constructor(templateElement) {
         super(templateElement.cloneNode(true));
-        this.nameElement = this.element.querySelector('.stat-modifier-row-name');
-        this.valueElement = this.element.querySelector('.stat-modifier-row-value');
+        this.nameElement = this.element.querySelector('.stat-modifier-row__name');
+        this.valueElement = this.element.querySelector('.stat-modifier-row__value');
 
-        const buttons = this.element.querySelectorAll('.stat-modifier-row-button');
+        const buttons = this.element.querySelectorAll('.stat-modifier-row__button');
         this.decreaseButton = buttons[0];
         this.increaseButton = buttons[1];
 

@@ -1,8 +1,8 @@
 class StatRow extends View {
     constructor(templateElement) {
         super(templateElement.cloneNode(true));
-        this.nameElement = this.element.querySelector('.stat-row-name');
-        this.valueElement = this.element.querySelector('.stat-row-value');
+        this.nameElement = this.element.querySelector('.stat-row__name');
+        this.valueElement = this.element.querySelector('.stat-row__value');
         this.modifierRows = {};
     }
 
@@ -32,13 +32,13 @@ class StatRow extends View {
 class SkillRow extends StatRow {
     constructor(templateElement) {
         super(templateElement);
-        this.nameElement.classList.add('stat-row-name-skill');
+        this.nameElement.classList.add('stat-row-name__skill');
     }
 }
 
 class SpecRow extends StatRow {
     constructor(templateElement) {
         super(templateElement);
-        this.nameElement.classList.add('stat-row-name-spec');
+        this.nameElement.classList.add('stat-row-name__spec');
     }
 }
