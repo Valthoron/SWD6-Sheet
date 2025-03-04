@@ -9,9 +9,21 @@
 </head>
 
 <body>
+    <!-- Navbar -->
+    <div id="navbar" class="navbar">
+        <div class="navbar-mode-buttons">
+            <button id="nav-mode-view" class="navbar-button active" data-mode="view">View</button>
+            <button id="nav-mode-create" class="navbar-button" data-mode="create">Create</button>
+            <button id="nav-mode-advance" class="navbar-button" data-mode="advance">Advance</button>
+        </div>
+    </div>
+
+    <!-- Sheet body -->
     <div class="stat-view" id="stat-view">
 
     </div>
+
+    <!-- Templates -->
     <div class="template-container">
         <div class="stat-row" id="template-stat-row">
             <div class="stat-row-name">Name</div>
@@ -31,9 +43,10 @@
     <script src="js/models/Character.js"></script>
 
     <!-- Views -->
-    <script src="js/views/View.js"></script>
-    <script src="js/views/StatRow.js"></script>
-    <script src="js/views/StatModifierRow.js"></script>
+    <script src="js/controllers/ModeHandler.js"></script>
+    <script src="js/controllers/View.js"></script>
+    <script src="js/controllers/StatRow.js"></script>
+    <script src="js/controllers/StatModifierRow.js"></script>
 
     <!-- Utils -->
     <script src="js/utils/Templates.js"></script>

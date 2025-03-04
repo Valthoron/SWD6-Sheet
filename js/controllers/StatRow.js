@@ -20,6 +20,7 @@ class StatRow extends View {
         row.setStatName(statName);
         this.appendChild(row);
         this.modifierRows[name] = row;
+
         return row;
     }
 

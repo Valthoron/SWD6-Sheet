@@ -146,8 +146,13 @@ function processCharacterStats(character, statView) {
 
 // Fill sheet after DOM loads
 document.addEventListener("DOMContentLoaded", async () => {
-    const statView = new View(document.getElementById('stat-view'));
     Templates.getInstance().initialize();
+
+    // Initialize the mode handler
+    const modeHandler = new ModeHandler();
+    modeHandler.initialize();
+
+    const statView = new View(document.getElementById('stat-view'));
 
     try {
         const character = await loadCharacterData('hecreus.json');

@@ -1,23 +1,74 @@
 body {
-    font-family: 'Tw Cen MT';
-    font-weight: bolder;
-    font-size: 19pt;
-    color: white;
     background-color: rgb(64, 64, 64);
+    color: white;
+    font-family: 'Tw Cen MT';
+    font-size: 19pt;
+    font-weight: bolder;
+    margin: 0;
+    padding-top: 60px;
 }
 
+.template-container {
+    display: none;
+}
+
+/*
+ ********** Navbar **********
+ */
+.navbar {
+    align-items: center;
+    background-color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    height: 50px;
+    justify-content: flex-end;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar-mode-buttons {
+    display: flex;
+    gap: 10px;
+    margin-right: 10px;
+}
+
+.navbar-button {
+    background-color: #555;
+    border-radius: 4px 4px 10px 0;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 8px 16px;
+}
+
+.navbar-button:hover {
+    background-color: #666;
+}
+
+.navbar-button.active {
+    background-color: #007bff;
+}
+
+/*
+ ********** Stats **********
+ */
 .stat-view {
     width: 450px;
 }
 
 .stat-row {
+    box-shadow: 0px 1px rgb(128, 128, 128) inset;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    margin-left: 20px;
     font-size: 20pt;
     line-height: 36px;
-    box-shadow: 0px 1px rgb(128, 128, 128) inset;
+    margin-left: 20px;
+    width: 100%;
 }
 
 .stat-row-name {
@@ -41,18 +92,18 @@ body {
 
 .stat-modifier-row {
     display: flex;
-    width: 100%;
     font-size: 14pt;
     font-weight: normal;
     line-height: 36px;
+    width: 100%;
 }
 
 .stat-modifier-row-name {
-    margin-left: auto;
-    margin-right: 30px;
     font-family: 'Segoe UI';
     font-size: 10pt;
     font-weight: normal;
+    margin-left: auto;
+    margin-right: 30px;
 }
 
 .stat-modifier-row-buttons {
@@ -61,13 +112,13 @@ body {
 }
 
 .stat-modifier-row-buttons button {
-    font-family: inherit;
-    font-weight: 800;
-    color: black;
     background-color: rgb(255, 140, 0);
     border: 0px;
-    width: 30px;
+    color: black;
+    font-family: inherit;
+    font-weight: 800;
     height: 25px;
+    width: 30px;
 }
 
 .stat-modifier-row-buttons button:hover {
@@ -80,10 +131,18 @@ body {
 
 .stat-modifier-row-value {
     margin-left: 0px;
-    width: 70px;
     text-align: left;
+    width: 70px;
 }
 
-.template-container {
+body[mode="view"] .stat-modifier-row {
+    display: none;
+}
+
+body[mode="edit"] .stat-modifier-row {
+    display: flex;
+}
+
+body[mode="advance"] .stat-modifier-row {
     display: none;
 }
