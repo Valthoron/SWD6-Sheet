@@ -65,76 +65,43 @@ function processCharacterStats(character, statView) {
     const modifierRowTemplate = templates.get('statModifierRow');
     const rows = {};
 
+    // Helper function to create and configure a row
+    function createStatRow(statElement, rowClass) {
+        const row = new rowClass(statRowTemplate);
+        row.setId(statElement.Type.toLowerCase() + "-" + statElement.Name);
+        row.setName(statElement.Name);
+
+        // Add modifier rows with references to their stat
+        const modTypes = ["Species", "Character", "Misc"];
+        modTypes.forEach(modType => {
+            const modRow = row.addModifierRow(modType, modifierRowTemplate, statElement.Name);
+            modRow.setValue(statElement[modType]);
+            modRow.setupEventListeners(character);
+        });
+
+        rows[statElement.Name] = row;
+        return row;
+    }
+
     character.stats.forEach(element => {
         let row = null;
 
         switch (element.Type) {
             case "Attribute":
-                row = new StatRow(statRowTemplate);
-                row.setId("attribute-" + element.Name);
-                row.setName(element.Name);
-
-                // Add modifier rows with references to their stat
-                const speciesRow = row.addModifierRow("Species", modifierRowTemplate, element.Name);
-                speciesRow.setValue(element.Species);
-                speciesRow.setupEventListeners(character);
-
-                const characterRow = row.addModifierRow("Character", modifierRowTemplate, element.Name);
-                characterRow.setValue(element.Character);
-                characterRow.setupEventListeners(character);
-
-                const miscRow = row.addModifierRow("Misc", modifierRowTemplate, element.Name);
-                miscRow.setValue(element.Misc);
-                miscRow.setupEventListeners(character);
-
+                row = createStatRow(element, StatRow);
                 statView.appendChild(row);
-                rows[element.Name] = row;
                 break;
 
             case "Skill":
-                row = new SkillRow(statRowTemplate);
-                row.setId("skill-" + element.Name);
-                row.setName(element.Name);
-
-                // Add modifier rows with references to their stat
-                const skillSpeciesRow = row.addModifierRow("Species", modifierRowTemplate, element.Name);
-                skillSpeciesRow.setValue(element.Species);
-                skillSpeciesRow.setupEventListeners(character);
-
-                const skillCharacterRow = row.addModifierRow("Character", modifierRowTemplate, element.Name);
-                skillCharacterRow.setValue(element.Character);
-                skillCharacterRow.setupEventListeners(character);
-
-                const skillMiscRow = row.addModifierRow("Misc", modifierRowTemplate, element.Name);
-                skillMiscRow.setValue(element.Misc);
-                skillMiscRow.setupEventListeners(character);
-
+                row = createStatRow(element, SkillRow);
                 let attributeRow = rows[element.Base];
                 attributeRow.appendChild(row);
-                rows[element.Name] = row;
                 break;
 
             case "Specialization":
-                row = new SpecRow(statRowTemplate);
-                row.setId("spec-" + element.Name);
-                row.setName(element.Name);
-
-                // Add modifier rows with references to their stat
-                const specSpeciesRow = row.addModifierRow("Species", modifierRowTemplate, element.Name);
-                specSpeciesRow.setValue(element.Species);
-                specSpeciesRow.setupEventListeners(character);
-
-                const specCharacterRow = row.addModifierRow("Character", modifierRowTemplate, element.Name);
-                specCharacterRow.setValue(element.Character);
-                specCharacterRow.setupEventListeners(character);
-
-                const specMiscRow = row.addModifierRow("Misc", modifierRowTemplate, element.Name);
-                specMiscRow.setValue(element.Misc);
-                specMiscRow.setupEventListeners(character);
-
+                row = createStatRow(element, SpecRow);
                 let skillRow = rows[element.Base];
                 skillRow.appendChild(row);
-                rows[element.Name] = row;
                 break;
         }
     });
