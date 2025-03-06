@@ -32,13 +32,13 @@ class StatRow extends View {
 class SkillRow extends StatRow {
     constructor(templateElement) {
         super(templateElement);
-        this.nameElement.classList.add('stat-row-name__skill');
+        this.nameElement.classList.add('stat-row-name--skill');
     }
 }
 
 class SpecRow extends StatRow {
     constructor(templateElement) {
         super(templateElement);
-        this.nameElement.classList.add('stat-row-name__spec');
+        this.nameElement.classList.add('stat-row-name--spec');
     }
 }

@@ -74,12 +74,12 @@ body {
     max-width: 350px
 }
 
-.stat-row__name__skill {
+.stat-row__name--skill {
     font-size: 18pt;
     font-weight: normal;
 }
 
-.stat-row__name__spec {
+.stat-row__name--spec {
     font-size: 16pt;
     font-style: italic;
     font-weight: normal;
