@@ -15,6 +15,7 @@ export class ModeHandler {
 
     initialize() {
         this.switchMode('view');
+        return this;
     }
 
     switchMode(mode) {

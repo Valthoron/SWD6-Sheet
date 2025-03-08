@@ -46,6 +46,18 @@ export class Character {
         };
     }
 
+    downloadAsJson() {
+        const characterData = JSON.stringify(this.toJSON(), null, 4);
+        const blob = new Blob([characterData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const fileName = `${this.#name || 'character'}.json`;
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = fileName;
+        downloadLink.click();
+        setTimeout(() => URL.revokeObjectURL(url), 100);
+    }
+
     static async fromData(path) {
         try {
             const response = await fetch('data/' + path);
