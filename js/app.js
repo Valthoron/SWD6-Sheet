@@ -1,4 +1,7 @@
-// Fill sheet after DOM loads
+import { SheetController } from './controllers/SheetController.js';
+import { Character } from './models/Character.js';
+import { ModeHandler } from './utils/ModeHandler.js';
+
 document.addEventListener("DOMContentLoaded", async () => {
     // Initialize the mode handler
     const modeHandler = new ModeHandler();

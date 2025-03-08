@@ -1,4 +1,4 @@
-class ModeHandler {
+export class ModeHandler {
     constructor() {
         this.currentMode = '';
 

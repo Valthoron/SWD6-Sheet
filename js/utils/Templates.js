@@ -1,4 +1,4 @@
-class Templates {
+export class Templates {
     static #instance = null;
     #templates = new Map();
 

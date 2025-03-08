@@ -1,4 +1,8 @@
-class StatRow extends View {
+import { Templates } from '../utils/Templates.js';
+import { StatModifierRow } from './StatModifierRow.js';
+import { View } from './View.js';
+
+export class StatRow extends View {
     _nameElement = null;
     _valueElement = null;
     _modifierRows = {};
@@ -40,14 +44,14 @@ class StatRow extends View {
 
 }
 
-class SkillRow extends StatRow {
+export class SkillRow extends StatRow {
     constructor() {
         super();
         this._nameElement.classList.add('stat-row__name--skill');
     }
 }
 
-class SpecRow extends StatRow {
+export class SpecRow extends StatRow {
     constructor() {
         super();
         this._nameElement.classList.add('stat-row__name--spec');

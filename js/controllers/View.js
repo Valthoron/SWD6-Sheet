@@ -1,4 +1,4 @@
-class View {
+export class View {
     #initialized = false;
 
     _element = null;

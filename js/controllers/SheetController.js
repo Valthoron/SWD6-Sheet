@@ -1,4 +1,7 @@
-class SheetController extends View {
+import { SkillRow, SpecRow, StatRow } from './StatRow.js';
+import { View } from './View.js';
+
+export class SheetController extends View {
     #character = null;
     #rows = {};
 

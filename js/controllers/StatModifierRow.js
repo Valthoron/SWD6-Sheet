@@ -1,4 +1,7 @@
-class StatModifierRow extends View {
+import { Templates } from '../utils/Templates.js';
+import { View } from './View.js';
+
+export class StatModifierRow extends View {
     _nameElement = null;
     _valueElement = null;
     _decreaseButton = null;
