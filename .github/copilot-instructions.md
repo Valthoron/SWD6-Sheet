@@ -1,8 +1,8 @@
 # Design Decisions
 ## Data Management
-- Model-View-Controller pattern is adopted
+- Modified MVC pattern with combined view controllers
 - All character data must be maintained in the Character class
-- View classes should only handle display logic, not store state
+- View controllers handle both display logic and UI interactions, don't store state
 - Stats should be stored in pips internally, converted to dice notation only for display
 
 ## Class Responsibilities
@@ -12,9 +12,11 @@
 - Provides methods to access and modify character data
 
 ### View Classes (StatRow, StatModifierRow, etc.)
-- Handle DOM manipulation
-- Display data in the correct format
+- Handle DOM manipulation and display logic
+- Manage UI interactions and user events
+- Communicate directly with models
 - Must not store duplicates of character data
+- Display data in the correct format
 
 # Project Structure and Conventions
 ## Code Placement
@@ -28,13 +30,14 @@
 - Keep relevant classes together, sorted from least specific to most specific
 
 ## File Placement
-- Models shouls be in the models directory
+- Models shouls be in the models directory, named <model>.js
 - Views should be either in the views directory, or placed as templates in index.html
-- Controllers should be in the controllers directory, named <view>Controller
+- Controllers should be in the controllers directory, named <view>.js
 - Data files should be in the data directory
 
 ## Coding
-- Follow single responsibility principle - each file should have one primary purpose
+- Follow single responsibility principle
+- Each view controller handles one UI component
 - Keep files small and focused
 - Keep main app.js file as a coordinator that uses classes/functions from other files
 - Prefer to add new elements in HTML, unless dynamic instantiation is a requirement
@@ -48,6 +51,7 @@
 - kebab-case for HTML element id's
 - Use BEM methodology for CSS class naming (Block__Element--Modifier)
 - Prefix private methods and properties with hash mark (#)
+- Prefix protected methods and properties with underscore (_)
 - Use descriptive, action-oriented names for event handlers (e.g., handleStatChange)
 
 ## Comments

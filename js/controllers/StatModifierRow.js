@@ -1,40 +1,45 @@
 class StatModifierRow extends View {
-    constructor(templateElement) {
-        super(templateElement.cloneNode(true));
-        this.nameElement = this.element.querySelector('.stat-modifier-row__name');
-        this.valueElement = this.element.querySelector('.stat-modifier-row__value');
+    _nameElement = null;
+    _valueElement = null;
+    _decreaseButton = null;
+    _increaseButton = null;
+    _statName = null;
+    _modifierType = null;
 
-        const buttons = this.element.querySelectorAll('.stat-modifier-row__button');
-        this.decreaseButton = buttons[0];
-        this.increaseButton = buttons[1];
+    constructor() {
+        super(Templates.getInstance().get('statModifierRow').cloneNode(true));
 
-        this.statName = null;
-        this.modifierType = null;
+        this._nameElement = this._element.querySelector('.stat-modifier-row__name');
+        this._valueElement = this._element.querySelector('.stat-modifier-row__value');
+
+        const buttons = this._element.querySelectorAll('.stat-modifier-row__button');
+        this._decreaseButton = buttons[0];
+        this._increaseButton = buttons[1];
     }
 
     setName(name) {
-        this.nameElement.textContent = name;
-        this.modifierType = name;
+        this._nameElement.textContent = name;
+        this._modifierType = name;
     }
 
     setStatName(statName) {
-        this.statName = statName;
+        this._statName = statName;
     }
 
     setValue(pips) {
-        this.valueElement.textContent = pipsToDice(pips);
+        this._valueElement.textContent = pipsToDice(pips);
     }
 
     setupEventListeners(character) {
-        this.character = character;
-        this.decreaseButton.addEventListener('click', () => this.handleModifierChange(-1));
-        this.increaseButton.addEventListener('click', () => this.handleModifierChange(1));
+        //this.character = character;
+        //this.decreaseButton.addEventListener('click', () => this.handleModifierChange(-1));
+        //this.increaseButton.addEventListener('click', () => this.handleModifierChange(1));
     }
 
     handleModifierChange(changeAmount) {
-        this.character.modifyStatModifier(this.statName, this.modifierType, changeAmount);
-        const stat = this.character.getStat(this.statName);
-        this.setValue(stat[this.modifierType]);
-        updateAffectedStats(this.character, this.statName);
+        //this.character.modifyStatModifier(this.statName, this.modifierType, changeAmount);
+        //const stat = this.character.getStat(this.statName);
+        //this.setValue(stat[this.modifierType]);
+        //updateAffectedStats(this.character, this.statName);
     };
 }
