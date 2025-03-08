@@ -45,7 +45,7 @@ body {
     padding: 8px 16px;
 }
 
-.navbar__button:hover {
+.navbar__button:not(.navbar__button--active):hover {
     background-color: #666;
 }
 
