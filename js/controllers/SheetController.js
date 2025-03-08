@@ -47,10 +47,14 @@ export class SheetController extends View {
             skillRow.appendChild(row);
             this.#rows[spec.Name] = row;
         });
+
+        Object.values(this.#rows).forEach(row => {
+            row.onModifierChange = (statName, modifierName, delta) => this.#statModifierChange(statName, modifierName, delta);
+        });
     }
 
     refresh() {
-        Object.entries(this.#rows).forEach(([name, row]) => {
+        Object.keys(this.#rows).forEach(name => {
             this._refreshStat(name);
         });
     }
@@ -67,5 +71,12 @@ export class SheetController extends View {
         subStats.forEach(subStat => {
             this._refreshStat(subStat.Name);
         });
+    }
+
+    #statModifierChange(statName, modifierName, delta) {
+        const stat = this.#character.getStat(statName);
+        stat[modifierName] += delta;
+        this.#character.calculateStat(stat);
+        this._refreshStat(statName);
     }
 }

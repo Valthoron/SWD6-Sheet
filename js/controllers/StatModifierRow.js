@@ -7,6 +7,8 @@ export class StatModifierRow extends View {
     _decreaseButton = null;
     _increaseButton = null;
 
+    onChange = null;
+
     constructor() {
         super(Templates.getInstance().get('statModifierRow').cloneNode(true));
 
@@ -16,6 +18,11 @@ export class StatModifierRow extends View {
         const buttons = this._element.querySelectorAll('.stat-modifier-row__button');
         this._decreaseButton = buttons[0];
         this._increaseButton = buttons[1];
+    }
+
+    _setupEventListeners() {
+        this._decreaseButton.addEventListener('click', () => this.#change(-1));
+        this._increaseButton.addEventListener('click', () => this.#change(1));
     }
 
     setName(name) {
@@ -30,16 +37,8 @@ export class StatModifierRow extends View {
         this._element.classList.add(`stat-modifier-row--${displayMode}`);
     }
 
-    setupEventListeners(character) {
-        //this.character = character;
-        //this.decreaseButton.addEventListener('click', () => this.handleModifierChange(-1));
-        //this.increaseButton.addEventListener('click', () => this.handleModifierChange(1));
-    }
-
-    handleModifierChange(changeAmount) {
-        //this.character.modifyStatModifier(this.statName, this.modifierType, changeAmount);
-        //const stat = this.character.getStat(this.statName);
-        //this.setValue(stat[this.modifierType]);
-        //updateAffectedStats(this.character, this.statName);
+    #change(delta) {
+        if (this.onChange)
+            this.onChange(this._nameElement.textContent, delta);
     };
 }

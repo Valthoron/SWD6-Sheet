@@ -7,6 +7,8 @@ export class StatRow extends View {
     _valueElement = null;
     _modifierRows = {};
 
+    onModifierChange = null;
+
     constructor() {
         super(Templates.getInstance().get('statRow').cloneNode(true));
 
@@ -19,10 +21,14 @@ export class StatRow extends View {
         this._createModifierRow("Character", "create");
         this._createModifierRow("Misc", "create");
         this._createModifierRow("Advancement", "advance");
+
+        Object.values(this._modifierRows).forEach(row => {
+            row.onChange = (modifierName, delta) => this.#modifierChange(modifierName, delta);
+        });
     }
 
     _createModifierRow(modifierName, displayMode) {
-        const row = new StatModifierRow();
+        const row = new StatModifierRow().initialize();
         row.setName(modifierName);
         row.setDisplayMode(displayMode);
         this.appendChild(row);
@@ -39,6 +45,11 @@ export class StatRow extends View {
 
     setModifierValue(modifierName, value) {
         this._modifierRows[modifierName].setValue(value);
+    }
+
+    #modifierChange(modifierName, delta) {
+        if (this.onModifierChange)
+            this.onModifierChange(this._nameElement.textContent, modifierName, delta);
     }
 }
 
