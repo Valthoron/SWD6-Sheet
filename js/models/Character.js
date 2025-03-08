@@ -1,15 +1,16 @@
+import { CharacterStat } from './CharacterStat.js';
+
 export class Character {
     #name = "";
     #stats = [];
 
     constructor(data) {
         this.#name = data.Name || "";
-        this.#stats = data.Stats || [];
+        this.#stats = (data.Stats || []).map(statData => new CharacterStat(statData));
     }
 
     get name() { return this.#name; }
-
-    getStats() { return this.#stats; }
+    get stats() { return this.#stats; }
 
     getStat(name) {
         return this.#stats.find(stat => stat.Name === name);
@@ -23,7 +24,20 @@ export class Character {
         return this.#stats.filter(stat => stat.Base === base);
     }
 
+    calculate() {
+        this.getStatsWithBase("").forEach(stat => {
+            this.calculateStat(stat);
+        });
+    }
 
+    calculateStat(stat) {
+        const baseStat = this.getStat(stat.Base);
+        stat.calculateTotal(baseStat?.Total || 0);
+
+        this.getStatsWithBase(stat.Name).forEach(childStat => {
+            this.calculateStat(childStat);
+        });
+    }
 
     toJSON() {
         return {
@@ -36,7 +50,9 @@ export class Character {
         try {
             const response = await fetch('data/' + path);
             const characterData = await response.json();
-            return new Character(characterData);
+            const character = new Character(characterData);
+            character.calculate();
+            return character;
         } catch (error) {
             console.error('Error loading character data:', error);
             throw error;

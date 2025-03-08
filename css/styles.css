@@ -93,7 +93,11 @@ body {
     display: flex;
     font-size: 14pt;
     font-weight: normal;
+    height: 0;
     line-height: 36px;
+    opacity: 0;
+    overflow: hidden;
+    transition: height 0.2s, opacity 0.2s;
     width: 100%;
 }
 
@@ -138,13 +142,16 @@ body {
  ********** Mode-based Display **********
  */
 body[mode="view"] .stat-modifier-row {
-    display: none;
+    height: 0;
+    opacity: 0;
 }
 
-body[mode="edit"] .stat-modifier-row {
-    display: flex;
+body[mode="create"] .stat-modifier-row--create {
+    height: 36px;
+    opacity: 1;
 }
 
-body[mode="advance"] .stat-modifier-row {
-    display: none;
+body[mode="advance"] .stat-modifier-row--advance {
+    height: 36px;
+    opacity: 1;
 }

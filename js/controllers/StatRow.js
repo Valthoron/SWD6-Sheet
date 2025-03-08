@@ -15,11 +15,18 @@ export class StatRow extends View {
     }
 
     _initializeChildViews() {
-        const modTypes = ["Species", "Character", "Misc"];
-        modTypes.forEach(modType => {
-            const modRow = this.addModifierRow(modType, modType);
-            this.appendChild(modRow);
-        });
+        this._createModifierRow("Species", "create");
+        this._createModifierRow("Character", "create");
+        this._createModifierRow("Misc", "create");
+        this._createModifierRow("Advancement", "advance");
+    }
+
+    _createModifierRow(modifierName, displayMode) {
+        const row = new StatModifierRow();
+        row.setName(modifierName);
+        row.setDisplayMode(displayMode);
+        this.appendChild(row);
+        this._modifierRows[modifierName] = row;
     }
 
     setName(name) {
@@ -30,18 +37,9 @@ export class StatRow extends View {
         this._valueElement.textContent = value;
     }
 
-    addModifierRow(name, statName) {
-        const row = new StatModifierRow();
-
-        row.setName(name);
-        row.setStatName(statName);
-
-        this.appendChild(row);
-        this._modifierRows[name] = row;
-
-        return row;
+    setModifierValue(modifierName, value) {
+        this._modifierRows[modifierName].setValue(value);
     }
-
 }
 
 export class SkillRow extends StatRow {

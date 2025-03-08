@@ -1,3 +1,4 @@
+import { pipsToDice } from '../utils/Formatters.js';
 import { SkillRow, SpecRow, StatRow } from './StatRow.js';
 import { View } from './View.js';
 
@@ -12,7 +13,7 @@ export class SheetController extends View {
 
     initialize() {
         super.initialize();
-        //this.refresh();
+        this.refresh();
         return this;
     }
 
@@ -56,7 +57,11 @@ export class SheetController extends View {
 
     _refreshStat(name) {
         const stat = this.#character.getStat(name);
-        this.#rows[name].setValue(this.#character.getStat(name).Species);
+        this.#rows[name].setValue(pipsToDice(stat.Total));
+        this.#rows[name].setModifierValue("Species", pipsToDice(stat.Species));
+        this.#rows[name].setModifierValue("Character", pipsToDice(stat.Character));
+        this.#rows[name].setModifierValue("Misc", pipsToDice(stat.Misc));
+        this.#rows[name].setModifierValue("Advancement", pipsToDice(stat.Advancement));
 
         const subStats = this.#character.getStatsWithBase(name);
         subStats.forEach(subStat => {

@@ -6,8 +6,6 @@ export class StatModifierRow extends View {
     _valueElement = null;
     _decreaseButton = null;
     _increaseButton = null;
-    _statName = null;
-    _modifierType = null;
 
     constructor() {
         super(Templates.getInstance().get('statModifierRow').cloneNode(true));
@@ -22,15 +20,14 @@ export class StatModifierRow extends View {
 
     setName(name) {
         this._nameElement.textContent = name;
-        this._modifierType = name;
     }
 
-    setStatName(statName) {
-        this._statName = statName;
+    setValue(value) {
+        this._valueElement.textContent = value;
     }
 
-    setValue(pips) {
-        this._valueElement.textContent = pipsToDice(pips);
+    setDisplayMode(displayMode) {
+        this._element.classList.add(`stat-modifier-row--${displayMode}`);
     }
 
     setupEventListeners(character) {
