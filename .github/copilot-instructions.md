@@ -20,6 +20,7 @@
 
 # Project Structure and Conventions
 ## Code Placement
+- Do not add, remove, change, fix or modify any part of the code that is not relevant to the task requested.
 - Classes with non-trivial functionality should be in their own files, named after the class
 - Classes with small, trivial, boilerplate or barebones functionality can be grouped by purpose in the same file, named appropriately for purpose
 - Utility functions should be grouped by purpose
