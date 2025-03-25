@@ -5,10 +5,22 @@ import { View } from './View.js';
 export class SheetController extends View {
     #character = null;
     #rows = {};
+    #totalAttributeSpeciesElement = null;
+    #totalAttributeCharacterElement = null;
+    #totalSkillElement = null;
+    #totalImprovementElement = null;
+    #totalGrandElement = null;
+    #totalImprovementPointsElement = null;
 
     constructor(character, sheetElement) {
         super(sheetElement);
         this.#character = character;
+        this.#totalAttributeSpeciesElement = this._element.querySelector('#stat-total-attribute-species');
+        this.#totalAttributeCharacterElement = this._element.querySelector('#stat-total-attribute-character');
+        this.#totalSkillElement = this._element.querySelector('#stat-total-skill');
+        this.#totalImprovementElement = this._element.querySelector('#stat-total-improvement');
+        this.#totalGrandElement = this._element.querySelector('#stat-total-grand');
+        this.#totalImprovementPointsElement = this._element.querySelector('#stat-total-improvement-points');
     }
 
     initialize() {
@@ -57,6 +69,8 @@ export class SheetController extends View {
         Object.keys(this.#rows).forEach(name => {
             this._refreshStat(name);
         });
+
+        this._refreshTotals();
     }
 
     _refreshStat(name) {
@@ -68,6 +82,7 @@ export class SheetController extends View {
         this.#rows[name].setModifierValue("Improvement", pipsToDice(stat.Improvement));
 
         const subStats = this.#character.getStatsWithBase(name);
+
         subStats.forEach(subStat => {
             this._refreshStat(subStat.Name);
         });
@@ -78,5 +93,25 @@ export class SheetController extends View {
         stat[modifierName] += delta;
         this.#character.calculateStat(stat);
         this._refreshStat(statName);
+
+        this._refreshTotals();
+    }
+
+    _refreshTotals() {
+        // TODO: Move calculation to character class
+        const attributes = this.#character.getStatsWithType("Attribute");
+        const skills = this.#character.getStatsWithType("Skill");
+
+        const totalAttributeSpecies = attributes.reduce((total, stat) => total + stat.Species, 0);
+        const totalAttributeCharacter = attributes.reduce((total, stat) => total + stat.Character, 0);
+        const totalSkill = skills.reduce((total, stat) => total + stat.Character, 0);
+        const totalImprovement = attributes.reduce((total, attribute) => total + attribute.Improvement, 0) + skills.reduce((total, stat) => total + stat.Improvement, 0);
+
+        this.#totalAttributeSpeciesElement.textContent = pipsToDice(totalAttributeSpecies);
+        this.#totalAttributeCharacterElement.textContent = pipsToDice(totalAttributeCharacter);
+        this.#totalSkillElement.textContent = pipsToDice(totalSkill);
+        this.#totalImprovementElement.textContent = pipsToDice(totalImprovement);
+        this.#totalGrandElement.textContent = pipsToDice(totalAttributeSpecies + totalAttributeCharacter + totalSkill + totalImprovement);
+        this.#totalImprovementPointsElement.textContent = "nil"; // TODO
     }
 }

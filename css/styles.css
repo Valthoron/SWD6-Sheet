@@ -6,6 +6,8 @@ body {
     font-weight: bolder;
     margin: 0;
     padding-top: 60px;
+    padding-bottom: 40px;
+    /* Add padding to account for the fixed status bar */
 }
 
 .template-container {
@@ -51,6 +53,31 @@ body {
 
 .navbar__button--active {
     background-color: #007bff;
+}
+
+/*
+ ********** Status Bar **********
+ */
+.status-bar {
+    align-items: center;
+    background-color: #333;
+    bottom: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    font-size: 14pt;
+    font-weight: normal;
+    height: 30px;
+    left: 0;
+    padding: 0 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.status-bar__message {
+    color: #ccc;
+    font-size: 12pt;
+    margin-right: 20px;
 }
 
 /*
