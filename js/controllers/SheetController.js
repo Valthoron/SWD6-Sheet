@@ -65,7 +65,7 @@ export class SheetController extends View {
         this.#rows[name].setModifierValue("Species", pipsToDice(stat.Species));
         this.#rows[name].setModifierValue("Character", pipsToDice(stat.Character));
         this.#rows[name].setModifierValue("Misc", pipsToDice(stat.Misc));
-        this.#rows[name].setModifierValue("Advancement", pipsToDice(stat.Advancement));
+        this.#rows[name].setModifierValue("Improvement", pipsToDice(stat.Improvement));
 
         const subStats = this.#character.getStatsWithBase(name);
         subStats.forEach(subStat => {

@@ -20,7 +20,7 @@ export class StatRow extends View {
         this._createModifierRow("Species", "create");
         this._createModifierRow("Character", "create");
         this._createModifierRow("Misc", "create");
-        this._createModifierRow("Advancement", "advance");
+        this._createModifierRow("Improvement", "advance");
 
         Object.values(this._modifierRows).forEach(row => {
             row.onChange = (modifierName, delta) => this.#modifierChange(modifierName, delta);
