@@ -1,55 +1,55 @@
 @font-face {
-    font-family: 'Tw Cen MT';
+    font-family: "Tw Cen MT";
     font-style: normal;
     font-weight: normal;
-    src: url('fonts/TCM-M.TTF');
+    src: url("../fonts/TCM-M.TTF");
 }
 
 @font-face {
-    font-family: 'Tw Cen MT';
+    font-family: "Tw Cen MT";
     font-style: italic;
     font-weight: normal;
-    src: url('fonts/TCM-MI.TTF');
+    src: url("../fonts/TCM-MI.TTF");
 }
 
 @font-face {
-    font-family: 'Tw Cen MT';
+    font-family: "Tw Cen MT";
     font-style: normal;
     font-weight: bold;
-    src: url('fonts/TCM-B.TTF');
+    src: url("../fonts/TCM-B.TTF");
 }
 
 @font-face {
-    font-family: 'Tw Cen MT Condensed';
+    font-family: "Tw Cen MT Condensed";
     font-style: italic;
     font-weight: bold;
-    src: url('fonts/TCM-BI.TTF');
+    src: url("../fonts/TCM-BI.TTF");
 }
 
 @font-face {
-    font-family: 'Tw Cen MT Condensed';
+    font-family: "Tw Cen MT Condensed";
     font-style: normal;
     font-weight: normal;
-    src: url('fonts/TCMC-M.TTF');
+    src: url("../fonts/TCMC-M.TTF");
 }
 
 @font-face {
-    font-family: 'Tw Cen MT Condensed';
+    font-family: "Tw Cen MT Condensed";
     font-style: normal;
     font-weight: bold;
-    src: url('fonts/TCMC-B.TTF');
+    src: url("../fonts/TCMC-B.TTF");
 }
 
 @font-face {
-    font-family: 'Tw Cen MT Condensed';
+    font-family: "Tw Cen MT Condensed";
     font-style: normal;
     font-weight: extra-bold;
-    src: url('fonts/TCMC-EB.TTF');
+    src: url("../fonts/TCMC-EB.TTF");
 }
 
 @font-face {
-    font-family: 'Segoe UI';
+    font-family: "Segoe UI";
     font-style: normal;
     font-weight: normal;
-    src: url('fonts/segoeui.ttf');
+    src: url("../fonts/segoeui.ttf");
 }

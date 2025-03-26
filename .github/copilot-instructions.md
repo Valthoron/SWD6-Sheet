@@ -43,14 +43,15 @@
 - Keep main app.js file as a coordinator that uses classes/functions from other files
 - Prefer to add new elements in HTML, unless dynamic instantiation is a requirement
 
-## Naming
+## Naming and Syntax
 - PascalCase for class names
 - camelCase for functions and variables
 - camelCase for file names (except class files)
 - PascalCase for class file names
-- kebab-case for CSS classes
+- kebab-case for xCSS classes
 - kebab-case for HTML element id's
 - Use BEM methodology for CSS class naming (Block__Element--Modifier)
+- Prefer double quotes (") over single quotes (') whenever possible and valid.
 - Prefix private methods and properties with hash mark (#)
 - Prefix protected methods and properties with underscore (_)
 - Use descriptive, action-oriented names for event handlers (e.g., handleStatChange)

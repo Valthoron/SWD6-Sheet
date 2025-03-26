@@ -1,13 +1,14 @@
+@import url("fonts.css");
+
 body {
     background-color: rgb(64, 64, 64);
     color: white;
-    font-family: 'Tw Cen MT';
+    font-family: "Tw Cen MT";
     font-size: 19pt;
     font-weight: bolder;
     margin: 0;
     padding-top: 60px;
     padding-bottom: 40px;
-    /* Add padding to account for the fixed status bar */
 }
 
 .template-container {
@@ -129,7 +130,7 @@ body {
 }
 
 .stat-modifier-row__name {
-    font-family: 'Segoe UI';
+    font-family: "Segoe UI";
     font-size: 10pt;
     font-weight: normal;
     margin-left: auto;
