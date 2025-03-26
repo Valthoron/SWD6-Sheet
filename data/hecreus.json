@@ -7,7 +7,7 @@
             "Base": "",
             "Species": 6,
             "Character": 0,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -16,7 +16,7 @@
             "Base": "",
             "Species": 6,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -25,7 +25,7 @@
             "Base": "",
             "Species": 6,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -34,7 +34,7 @@
             "Base": "",
             "Species": 6,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -43,7 +43,7 @@
             "Base": "",
             "Species": 6,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -52,7 +52,7 @@
             "Base": "",
             "Species": 6,
             "Character": 6,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -61,7 +61,7 @@
             "Base": "Strength",
             "Species": 0,
             "Character": 1,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0,
             "BaseStarting": 0,
             "AdvancedSkill": false
@@ -74,7 +74,7 @@
             "AdvancedSkill": false,
             "Species": 0,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -85,7 +85,7 @@
             "AdvancedSkill": false,
             "Species": 0,
             "Character": 2,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -96,7 +96,7 @@
             "AdvancedSkill": false,
             "Species": 0,
             "Character": 6,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -107,7 +107,7 @@
             "AdvancedSkill": false,
             "Species": 0,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -118,7 +118,7 @@
             "AdvancedSkill": false,
             "Species": 3,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -129,7 +129,7 @@
             "AdvancedSkill": false,
             "Species": 3,
             "Character": 0,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -140,7 +140,7 @@
             "AdvancedSkill": false,
             "Species": 0,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -151,7 +151,7 @@
             "AdvancedSkill": true,
             "Species": 0,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         },
         {
@@ -162,7 +162,7 @@
             "AdvancedSkill": false,
             "Species": 0,
             "Character": 3,
-            "Misc": 0,
+            "Bonus": 0,
             "Improvement": 0
         }
     ]

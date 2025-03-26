@@ -17,20 +17,14 @@ export class StatRow extends View {
     }
 
     _initializeChildViews() {
-        this._createModifierRow("Species", "create");
-        this._createModifierRow("Character", "create");
-        this._createModifierRow("Misc", "create");
         this._createModifierRow("Improvement", "advance");
-
-        Object.values(this._modifierRows).forEach(row => {
-            row.onChange = (modifierName, delta) => this.#modifierChange(modifierName, delta);
-        });
     }
 
     _createModifierRow(modifierName, displayMode) {
         const row = new StatModifierRow().initialize();
         row.setName(modifierName);
         row.setDisplayMode(displayMode);
+        row.onChange = (modifierName, delta) => this.#modifierChange(modifierName, delta);
         this.appendChild(row);
         this._modifierRows[modifierName] = row;
     }
@@ -53,10 +47,27 @@ export class StatRow extends View {
     }
 }
 
+export class AttributeRow extends StatRow {
+    _initializeChildViews() {
+        this._createModifierRow("Species", "create");
+        this._createModifierRow("Character", "create");
+        this._createModifierRow("Bonus", "create");
+
+        super._initializeChildViews();
+    }
+}
+
 export class SkillRow extends StatRow {
     constructor() {
         super();
         this._nameElement.classList.add('stat-row__name--skill');
+    }
+
+    _initializeChildViews() {
+        this._createModifierRow("Character", "create");
+        this._createModifierRow("Bonus", "create");
+
+        super._initializeChildViews();
     }
 }
 
@@ -64,5 +75,12 @@ export class SpecRow extends StatRow {
     constructor() {
         super();
         this._nameElement.classList.add('stat-row__name--spec');
+    }
+
+    _initializeChildViews() {
+        this._createModifierRow("Character", "create");
+        this._createModifierRow("Bonus", "create");
+
+        super._initializeChildViews();
     }
 }

@@ -1,5 +1,5 @@
 import { pipsToDice } from '../utils/Formatters.js';
-import { SkillRow, SpecRow, StatRow } from './StatRow.js';
+import { StatRow, AttributeRow, SkillRow, SpecRow } from './StatRow.js';
 import { View } from './View.js';
 
 export class SheetController extends View {
@@ -31,11 +31,11 @@ export class SheetController extends View {
 
     _initializeChildViews() {
         // Create rows in attribute, skill, spec order
-        // so that rows are parenteed correctly regardless
+        // so that rows are parented correctly regardless
         // of order in character data
 
         this.#character.getStatsWithType("Attribute").forEach(attrib => {
-            const row = new StatRow().initialize();
+            const row = new AttributeRow().initialize();
             row.setName(attrib.Name);
 
             this.appendChild(row);
@@ -76,10 +76,10 @@ export class SheetController extends View {
     _refreshStat(name) {
         const stat = this.#character.getStat(name);
         this.#rows[name].setValue(pipsToDice(stat.Total));
-        this.#rows[name].setModifierValue("Species", pipsToDice(stat.Species));
-        this.#rows[name].setModifierValue("Character", pipsToDice(stat.Character));
-        this.#rows[name].setModifierValue("Misc", pipsToDice(stat.Misc));
-        this.#rows[name].setModifierValue("Improvement", pipsToDice(stat.Improvement));
+        //this.#rows[name].setModifierValue("Species", pipsToDice(stat.Species));
+        //this.#rows[name].setModifierValue("Character", pipsToDice(stat.Character));
+        //this.#rows[name].setModifierValue("Bonus", pipsToDice(stat.Bonus));
+        //this.#rows[name].setModifierValue("Improvement", pipsToDice(stat.Improvement));
 
         const subStats = this.#character.getStatsWithBase(name);
 

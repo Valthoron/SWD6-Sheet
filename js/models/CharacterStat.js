@@ -8,7 +8,7 @@ export class CharacterStat {
 
     #species = 0;
     #character = 0;
-    #misc = 0;
+    #bonus = 0;
     #improvement = 0;
 
     #total = 0;
@@ -24,7 +24,7 @@ export class CharacterStat {
 
         this.#species = data.Species || 0;
         this.#character = data.Character || 0;
-        this.#misc = data.Misc || 0;
+        this.#bonus = data.Bonus || 0;
         this.#improvement = data.Improvement || 0;
     }
 
@@ -41,8 +41,8 @@ export class CharacterStat {
     get Character() { return this.#character; }
     set Character(value) { this.#character = value; }
 
-    get Misc() { return this.#misc; }
-    set Misc(value) { this.#misc = value; }
+    get Bonus() { return this.#bonus; }
+    set Bonus(value) { this.#bonus = value; }
 
     get Improvement() { return this.#improvement; }
     set Improvement(value) { this.#improvement = value; }
@@ -51,21 +51,21 @@ export class CharacterStat {
     get CharacterPoints() { return this.#characterPoints; }
 
     calculateTotal(baseTotal) {
-        this.#total = baseTotal + this.#species + this.#character + this.#misc + this.#improvement;
+        this.#total = baseTotal + this.#species + this.#character + this.#bonus + this.#improvement;
     }
 
     calculateCharacterPoints() {
         switch (this.#type) {
             case "Attribute":
-                this.#characterPoints = this.#species + this.#character + this.#misc + this.#improvement - this.#baseStarting;
+                this.#characterPoints = this.#species + this.#character + this.#bonus + this.#improvement - this.#baseStarting;
                 return;
 
             case "Skill":
-                this.#characterPoints = this.#species + this.#character + this.#misc + this.#improvement;
+                this.#characterPoints = this.#species + this.#character + this.#bonus + this.#improvement;
                 return;
 
             case "Spec":
-                this.#characterPoints = this.#species + this.#character + this.#misc + this.#improvement - this.#baseStarting;
+                this.#characterPoints = this.#species + this.#character + this.#bonus + this.#improvement - this.#baseStarting;
                 return;
         }
 
@@ -79,7 +79,7 @@ export class CharacterStat {
             "Base": this.#base,
             "Species": this.#species,
             "Character": this.#character,
-            "Misc": this.#misc,
+            "Bonus": this.#bonus,
             "improvement": this.#improvement
         };
 
