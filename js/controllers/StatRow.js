@@ -1,8 +1,10 @@
+import { pipsToDice } from '../utils/Formatters.js';
 import { Templates } from '../utils/Templates.js';
 import { StatModifierRow } from './StatModifierRow.js';
 import { View } from './View.js';
 
 export class StatRow extends View {
+    _stat = null;
     _nameElement = null;
     _valueElement = null;
     _modifierRows = {};
@@ -14,6 +16,23 @@ export class StatRow extends View {
 
         this._nameElement = this._element.querySelector('.stat-row__name');
         this._valueElement = this._element.querySelector('.stat-row__value');
+    }
+
+    initialize(stat) {
+        super.initialize();
+
+        this._stat = stat;
+        this._nameElement.textContent = stat.Name;
+
+        return this;
+    }
+
+    refresh() {
+        this._valueElement.textContent = pipsToDice(this._stat.Total);
+
+        Object.entries(this._modifierRows).forEach(([modifierName, row]) => {
+            row.setValue(this._stat[modifierName]);
+        });
     }
 
     _initializeChildViews() {
@@ -35,10 +54,6 @@ export class StatRow extends View {
 
     setValue(value) {
         this._valueElement.textContent = value;
-    }
-
-    setModifierValue(modifierName, value) {
-        this._modifierRows[modifierName].setValue(value);
     }
 
     #modifierChange(modifierName, delta) {

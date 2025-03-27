@@ -1,5 +1,5 @@
 import { pipsToDice } from '../utils/Formatters.js';
-import { StatRow, AttributeRow, SkillRow, SpecRow } from './StatRow.js';
+import { AttributeRow, SkillRow, SpecRow } from './StatRow.js';
 import { View } from './View.js';
 
 export class SheetController extends View {
@@ -34,30 +34,24 @@ export class SheetController extends View {
         // so that rows are parented correctly regardless
         // of order in character data
 
-        this.#character.getStatsWithType("Attribute").forEach(attrib => {
-            const row = new AttributeRow().initialize();
-            row.setName(attrib.Name);
-
+        this.#character.getStatsWithType("Attribute").forEach(attribute => {
+            const row = new AttributeRow().initialize(attribute);
             this.appendChild(row);
-            this.#rows[attrib.Name] = row;
+            this.#rows[attribute.Name] = row;
         });
 
         this.#character.getStatsWithType("Skill").forEach(skill => {
-            const row = new SkillRow().initialize();
-            row.setName(skill.Name);
-
+            const row = new SkillRow().initialize(skill);
             const attribRow = this.#rows[skill.Base];
             attribRow.appendChild(row);
             this.#rows[skill.Name] = row;
         });
 
-        this.#character.getStatsWithType("Specialization").forEach(spec => {
-            const row = new SpecRow().initialize();
-            row.setName(spec.Name);
-
-            const skillRow = this.#rows[spec.Base];
+        this.#character.getStatsWithType("Specialization").forEach(specialization => {
+            const row = new SpecRow().initialize(specialization);
+            const skillRow = this.#rows[specialization.Base];
             skillRow.appendChild(row);
-            this.#rows[spec.Name] = row;
+            this.#rows[specialization.Name] = row;
         });
 
         Object.values(this.#rows).forEach(row => {
@@ -74,16 +68,9 @@ export class SheetController extends View {
     }
 
     _refreshStat(name) {
-        const stat = this.#character.getStat(name);
-        this.#rows[name].setValue(pipsToDice(stat.Total));
-        //this.#rows[name].setModifierValue("Species", pipsToDice(stat.Species));
-        //this.#rows[name].setModifierValue("Character", pipsToDice(stat.Character));
-        //this.#rows[name].setModifierValue("Bonus", pipsToDice(stat.Bonus));
-        //this.#rows[name].setModifierValue("Improvement", pipsToDice(stat.Improvement));
+        this.#rows[name].refresh();
 
-        const subStats = this.#character.getStatsWithBase(name);
-
-        subStats.forEach(subStat => {
+        this.#character.getStatsWithBase(name).forEach(subStat => {
             this._refreshStat(subStat.Name);
         });
     }

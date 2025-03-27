@@ -1,3 +1,4 @@
+import { pipsToDice } from '../utils/Formatters.js';
 import { Templates } from '../utils/Templates.js';
 import { View } from './View.js';
 
@@ -30,7 +31,7 @@ export class StatModifierRow extends View {
     }
 
     setValue(value) {
-        this._valueElement.textContent = value;
+        this._valueElement.textContent = pipsToDice(value);
     }
 
     setDisplayMode(displayMode) {
