@@ -1,4 +1,6 @@
 export class ModeHandler {
+    #storageKey = 'swd6-sheet-mode';
+
     constructor() {
         this.currentMode = '';
 
@@ -14,7 +16,8 @@ export class ModeHandler {
     }
 
     initialize() {
-        this.switchMode('view');
+        const savedMode = localStorage.getItem(this.#storageKey) || 'view';
+        this.switchMode(savedMode);
         return this;
     }
 
@@ -24,8 +27,9 @@ export class ModeHandler {
         this.buttons[this.currentMode]?.classList.remove('navbar__button--active');
         this.buttons[mode].classList.add('navbar__button--active');
 
-        // Set mode
         this.currentMode = mode;
         document.body.setAttribute('mode', mode);
+
+        localStorage.setItem(this.#storageKey, mode);
     }
 }
