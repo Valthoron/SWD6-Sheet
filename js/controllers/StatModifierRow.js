@@ -21,25 +21,25 @@ export class StatModifierRow extends View {
         this._increaseButton = buttons[1];
     }
 
-    _setupEventListeners() {
-        this._decreaseButton.addEventListener('click', () => this.#change(-1));
-        this._increaseButton.addEventListener('click', () => this.#change(1));
-    }
+    initialize({ name, displayMode }) {
+        super.initialize();
 
-    setName(name) {
         this._nameElement.textContent = name;
+        this._element.classList.add(`stat-modifier-row--${displayMode}`);
+
+        return this;
     }
 
     setValue(value) {
         this._valueElement.textContent = pipsToDice(value);
     }
 
-    setDisplayMode(displayMode) {
-        this._element.classList.add(`stat-modifier-row--${displayMode}`);
+    _setupEventListeners() {
+        this._decreaseButton.addEventListener('click', () => this._change(-1));
+        this._increaseButton.addEventListener('click', () => this._change(1));
     }
 
-    #change(delta) {
-        if (this.onChange)
-            this.onChange(this._nameElement.textContent, delta);
+    _change(delta) {
+        this.onChange?.(this._nameElement.textContent, delta);
     };
 }
