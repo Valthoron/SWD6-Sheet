@@ -6,7 +6,7 @@ export class Character {
 
     constructor(data) {
         this.#name = data.Name || "";
-        this.#stats = (data.Stats || []).map(statData => new CharacterStat(statData));
+        this.#stats = (data.Stats || []).map(statData => new CharacterStat(this, statData));
     }
 
     get name() { return this.#name; }
@@ -25,18 +25,7 @@ export class Character {
     }
 
     calculate() {
-        this.getStatsWithBase("").forEach(stat => {
-            this.calculateStat(stat);
-        });
-    }
-
-    calculateStat(stat) {
-        const baseStat = this.getStat(stat.Base);
-        stat.calculateTotal(baseStat?.Total || 0);
-
-        this.getStatsWithBase(stat.Name).forEach(childStat => {
-            this.calculateStat(childStat);
-        });
+        this.#stats.forEach(stat => { stat.calculate(this); });
     }
 
     toJSON() {

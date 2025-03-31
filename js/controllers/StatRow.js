@@ -31,7 +31,10 @@ export class StatRow extends View {
     }
 
     refresh() {
-        this._valueElement.textContent = pipsToDice(this._stat.Total);
+        if (this._stat.TotalWithBonus != this._stat.Total)
+            this._valueElement.textContent = "(" + pipsToDice(this._stat.Total) + ") " + pipsToDice(this._stat.TotalWithBonus);
+        else
+            this._valueElement.textContent = pipsToDice(this._stat.Total);
 
         Object.entries(this._modifierRows).forEach(([modifierName, row]) => {
             row.setValue(this._stat[modifierName]);
@@ -39,7 +42,9 @@ export class StatRow extends View {
     }
 
     _initializeChildViews() {
+        this._createModifierRow("Starting", "create");
         this._createModifierRow("Improvement", "advance");
+        this._createModifierRow("Bonus", "create");
     }
 
     _createModifierRow(modifierName, displayMode) {
@@ -57,8 +62,6 @@ export class StatRow extends View {
 export class AttributeRow extends StatRow {
     _initializeChildViews() {
         this._createModifierRow("Species", "create");
-        this._createModifierRow("Character", "create");
-        this._createModifierRow("Bonus", "create");
 
         super._initializeChildViews();
     }
@@ -71,9 +74,6 @@ export class SkillRow extends StatRow {
     }
 
     _initializeChildViews() {
-        this._createModifierRow("Character", "create");
-        this._createModifierRow("Bonus", "create");
-
         super._initializeChildViews();
     }
 }
@@ -85,9 +85,6 @@ export class SpecRow extends StatRow {
     }
 
     _initializeChildViews() {
-        this._createModifierRow("Character", "create");
-        this._createModifierRow("Bonus", "create");
-
         super._initializeChildViews();
     }
 }

@@ -1,26 +1,21 @@
 # Design Decisions
-## Data Management
+## Data Management Principles
 - Modified MVC pattern with combined view controllers
-- All character data must be maintained in the Character class
-- View controllers handle both display logic and UI interactions, don't store state
-- Stats should be stored in pips internally, converted to dice notation only for display
+- Stats stored in pips internally, converted to dice notation for display
 
-## Class Responsibilities
-### Character
+## Character Class
 - Stores all character data
 - Handles stat calculations
 - Provides methods to access and modify character data
 
-### View Classes (StatRow, StatModifierRow, etc.)
+## View Controllers
 - Handle DOM manipulation and display logic
 - Manage UI interactions and user events
 - Communicate directly with models
-- Must not store duplicates of character data
-- Display data in the correct format
+- Must not store duplicates of character data or application state
 
 # Project Structure and Conventions
 ## Code Placement
-- Do not add, remove, change, fix or modify any part of the code that is not relevant to the task requested.
 - Classes with non-trivial functionality should be in their own files, named after the class
 - Classes with small, trivial, boilerplate or barebones functionality can be grouped by purpose in the same file, named appropriately for purpose
 - Utility functions should be grouped by purpose
@@ -31,24 +26,23 @@
 - Keep relevant classes together, sorted from least specific to most specific
 
 ## File Placement
-- Models shouls be in the models directory, named <model>.js
+- Models should be in the models directory, named <model>.js
 - Views should be either in the views directory, or placed as templates in index.html
 - Controllers should be in the controllers directory, named <view>.js
 - Data files should be in the data directory
 
 ## Coding
-- Follow single responsibility principle
-- Each view controller handles one UI component
+- Follow single responsibility principle (e.g., each view controller handles only one UI component)
 - Keep files small and focused
 - Keep main app.js file as a coordinator that uses classes/functions from other files
 - Prefer to add new elements in HTML, unless dynamic instantiation is a requirement
 
 ## Naming and Syntax
-- PascalCase for class names
-- camelCase for functions and variables
 - camelCase for file names (except class files)
 - PascalCase for class file names
-- kebab-case for xCSS classes
+- PascalCase for class names
+- camelCase for functions and variables
+- kebab-case for CSS classes
 - kebab-case for HTML element id's
 - Use BEM methodology for CSS class naming (Block__Element--Modifier)
 - Prefer double quotes (") over single quotes (') whenever possible and valid.
@@ -58,8 +52,7 @@
 
 ## Comments
 - Write short but explanatory comments for each function and code section you generate
-- Don't write comments for single lines where simply reading the code is just as good as reading the comment
-- Only write comments for single lines if that line is complicated to read, or performs a non-intuitive task
+- Only write comments for single lines when the code is complicated or non-intuitive; avoid commenting when the code is self-explanatory
 - Comments regarding functions/methods should be below the function/method name, inside the scope braces
 - Don't write placeholder comments for removed code
 - Use single-line comments instead of comment blocks unless strictly necessary

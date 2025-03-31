@@ -1,45 +1,48 @@
+import { jsonAddNonZero } from "../utils/Json.js";
+
 export class CharacterStat {
+    #character = null;
+
     #type = "";
     #name = "";
     #base = "";
 
     #baseStarting = 0;
-    #advancedSkill = false;
 
     #species = 0;
-    #character = 0;
+    #starting = 0;
     #bonus = 0;
     #improvement = 0;
 
     #total = 0;
     #characterPoints = 0;
 
-    constructor(data = {}) {
+    constructor(character, data = {}) {
+        this.#character = character;
+
         this.#name = data.Name;
         this.#type = data.Type;
         this.#base = data.Base || "";
 
         this.#baseStarting = data.BaseStarting || 0;
-        this.#advancedSkill = data.AdvancedSkill || false;
 
         this.#species = data.Species || 0;
-        this.#character = data.Character || 0;
+        this.#starting = data.Character || 0;
         this.#bonus = data.Bonus || 0;
         this.#improvement = data.Improvement || 0;
     }
 
-    get Name() { return (this.#advancedSkill ? "(A) " : "") + this.#name; }
+    get Name() { return (this.#type === "AdvancedSkill" ? "(A) " : "") + this.#name; }
     get Type() { return this.#type; }
     get Base() { return this.#base; }
 
     get BaseStarting() { return this.#baseStarting; }
-    get AdvancedSkill() { return this.#advancedSkill; }
 
     get Species() { return this.#species; }
     set Species(value) { this.#species = value; }
 
-    get Character() { return this.#character; }
-    set Character(value) { this.#character = value; }
+    get Starting() { return this.#starting; }
+    set Starting(value) { this.#starting = value; }
 
     get Bonus() { return this.#bonus; }
     set Bonus(value) { this.#bonus = value; }
@@ -48,46 +51,106 @@ export class CharacterStat {
     set Improvement(value) { this.#improvement = value; }
 
     get Total() { return this.#total; }
+    get TotalWithBonus() { return this.#total + this.#bonus; }
     get CharacterPoints() { return this.#characterPoints; }
 
-    calculateTotal(baseTotal) {
-        this.#total = baseTotal + this.#species + this.#character + this.#bonus + this.#improvement;
+    calculate(character) {
+        this.calculateTotal(character);
+        this.calculateCharacterPoints();
+    }
+
+    calculateTotal() {
+        const calculators = {
+            "Attribute": () => this.#calculateAttributeTotal(),
+            "Skill": () => this.#calculateSkillTotal(),
+            "AdvancedSkill": () => this.#calculateAdvancedSkillTotal(),
+            "Specialization": () => this.#calculateSpecializationTotal()
+        };
+
+        this.#total = calculators[this.#type]();
+    }
+
+    #calculateAttributeTotal() {
+        // species + starting
+
+        return this.#species + this.#starting + this.#improvement;
+    }
+
+    #calculateSkillTotal() {
+        // (attribute: species + starting + improvement) + starting
+
+        const attribute = this.#character.getStat(this.#base);
+
+        return (attribute.#species + attribute.#starting + attribute.#improvement) + this.#starting + this.#improvement;
+    }
+
+    #calculateAdvancedSkillTotal() {
+        // starting + improvement
+
+        return this.#starting + this.#improvement;
+    }
+
+    #calculateSpecializationTotal() {
+        // Spec on creation
+        // (attribute: species + starting + improvement) + (base: character) + starting
+
+        // Spec learned later
+        // (attribute: species + starting + improvement) + (base: character) + starting
+
+        const skill = this.#character.getStat(this.#base);
+        const attribute = this.#character.getStat(skill.#base);
+
+        if (this.#baseStarting !== 0)
+            return (attribute.#species + attribute.#starting + attribute.#improvement) + (skill.#baseStarting) + this.#starting + this.#improvement;
+        else
+            return (attribute.#species + attribute.#starting + attribute.#improvement) + (skill.#starting) + this.#starting + this.#improvement;
     }
 
     calculateCharacterPoints() {
-        switch (this.#type) {
-            case "Attribute":
-                this.#characterPoints = this.#species + this.#character + this.#bonus + this.#improvement - this.#baseStarting;
-                return;
-
-            case "Skill":
-                this.#characterPoints = this.#species + this.#character + this.#bonus + this.#improvement;
-                return;
-
-            case "Spec":
-                this.#characterPoints = this.#species + this.#character + this.#bonus + this.#improvement - this.#baseStarting;
-                return;
+        if (this.#improvement < 0) {
+            this.#characterPoints = 0;
+            return;
         }
 
-        this.#characterPoints = 0;
+        if (this.#improvement > 300) {
+            this.#characterPoints = 0;
+            return;
+        }
+
+        const multipliers = {
+            "Attribute": 10,
+            "Skill": 1,
+            "AdvancedSkill": 2,
+            "Specialization": 0.5
+        }
+
+        const multiplier = multipliers[this.#type];
+        let points = 0;
+        let start = this.#total - this.#improvement;
+
+        while (start < this.#total) {
+            let dice = Math.floor(start / 3)
+            points += Math.ceil(multiplier * dice);
+            start++;
+        }
+
+        this.#characterPoints = points;
     }
 
     toJSON() {
         let json = {
             "Type": this.#type,
-            "Name": this.#name,
-            "Base": this.#base,
-            "Species": this.#species,
-            "Character": this.#character,
-            "Bonus": this.#bonus,
-            "improvement": this.#improvement
+            "Name": this.#name
         };
 
-        if (this.#baseStarting !== 0)
-            json["BaseStarting"] = this.#baseStarting;
+        if (this.#type !== "Attribute")
+            json["Base"] = this.#base;
 
-        if (this.#advancedSkill)
-            json["AdvancedSkill"] = this.#advancedSkill;
+        jsonAddNonZero(json, "Species", this.#species);
+        jsonAddNonZero(json, "Starting", this.#starting);
+        jsonAddNonZero(json, "Improvement", this.#improvement);
+        jsonAddNonZero(json, "Bonus", this.#bonus);
+        jsonAddNonZero(json, "BaseStarting", this.#baseStarting);
 
         return json;
     }
