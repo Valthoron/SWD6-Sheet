@@ -6,9 +6,9 @@ export class SheetController extends View {
     _character = null;
     _rows = {};
 
-    _totalAttributeSpeciesElement = null;
-    _totalAttributeStartingElement = null;
-    _totalSkillElement = null;
+    _totalAttributesSpeciesElement = null;
+    _totalAttributesStartingElement = null;
+    _totalSkillsElement = null;
     _totalImprovementElement = null;
     _totalDiceElement = null;
     _totalCharacterPointsElement = null;
@@ -18,9 +18,9 @@ export class SheetController extends View {
         this._character = character;
 
         // Statistics / totals
-        this._totalAttributeSpeciesElement = this._element.querySelector('#stat-total-attribute-species');
-        this._totalAttributeStartingElement = this._element.querySelector('#stat-total-attribute-starting');
-        this._totalSkillElement = this._element.querySelector('#stat-total-skill');
+        this._totalAttributesSpeciesElement = this._element.querySelector('#stat-total-attributes-species');
+        this._totalAttributesStartingElement = this._element.querySelector('#stat-total-attributes-starting');
+        this._totalSkillsElement = this._element.querySelector('#stat-total-skills');
         this._totalImprovementElement = this._element.querySelector('#stat-total-improvement');
         this._totalDiceElement = this._element.querySelector('#stat-total-dice');
         this._totalCharacterPointsElement = this._element.querySelector('#stat-total-character-points');
@@ -77,21 +77,11 @@ export class SheetController extends View {
     }
 
     _refreshTotals() {
-        // TODO: Move calculation to character class
-        const attributes = this._character.getStatsWithType("Attribute");
-        const skills = this._character.getStatsWithType("Skill");
-
-        const totalAttributeSpecies = attributes.reduce((total, stat) => total + stat.Species, 0);
-        const totalAttributeCharacter = attributes.reduce((total, stat) => total + stat.Character, 0);
-        const totalSkill = skills.reduce((total, stat) => total + stat.Character, 0);
-        const totalImprovement = attributes.reduce((total, attribute) => total + attribute.Improvement, 0) + skills.reduce((total, stat) => total + stat.Improvement, 0);
-        const totalCharacterPoints = attributes.reduce((total, stat) => total + stat.CharacterPoints, 0) + skills.reduce((total, stat) => total + stat.CharacterPoints, 0);
-
-        this._totalAttributeSpeciesElement.textContent = pipsToDice(totalAttributeSpecies);
-        this._totalAttributeStartingElement.textContent = pipsToDice(totalAttributeCharacter);
-        this._totalSkillElement.textContent = pipsToDice(totalSkill);
-        this._totalImprovementElement.textContent = pipsToDice(totalImprovement);
-        this._totalDiceElement.textContent = pipsToDice(totalAttributeSpecies + totalAttributeCharacter + totalSkill + totalImprovement);
-        this._totalCharacterPointsElement.textContent = totalCharacterPoints;
+        this._totalAttributesSpeciesElement.textContent = pipsToDice(this._character.Totals.AttributesSpecies);
+        this._totalAttributesStartingElement.textContent = pipsToDice(this._character.Totals.AttributesStarting);
+        this._totalSkillsElement.textContent = pipsToDice(this._character.Totals.Skills);
+        this._totalImprovementElement.textContent = pipsToDice(this._character.Totals.Improvement);
+        this._totalDiceElement.textContent = pipsToDice(this._character.Totals.Dice);
+        this._totalCharacterPointsElement.textContent = this._character.Totals.CharacterPoints;
     }
 }

@@ -4,13 +4,24 @@ export class Character {
     #name = "";
     #stats = [];
 
+    #totals = {
+        AttributesSpecies: 0,
+        AttributesStarting: 0,
+        Attributes: 0,
+        Skills: 0,
+        Improvement: 0,
+        Dice: 0,
+        CharacterPoints: 0
+    }
+
     constructor(data) {
         this.#name = data.Name || "";
         this.#stats = (data.Stats || []).map(statData => new CharacterStat(this, statData));
     }
 
-    get name() { return this.#name; }
-    get stats() { return this.#stats; }
+    get Name() { return this.#name; }
+    get Stats() { return this.#stats; }
+    get Totals() { return this.#totals; }
 
     getStat(name) {
         return this.#stats.find(stat => stat.Name === name);
@@ -26,6 +37,21 @@ export class Character {
 
     calculate() {
         this.#stats.forEach(stat => { stat.calculate(this); });
+
+        // Statistics / totals
+        const attributes = this.getStatsWithType("Attribute");
+        const skills = this.#stats.filter(stat =>
+            ["Skill", "AdvancedSkill", "Specialization"].includes(stat.Type)
+        );
+
+        this.#totals.AttributesSpecies = attributes.reduce((total, stat) => total + stat.Species, 0);
+        this.#totals.AttributesStarting = attributes.reduce((total, stat) => total + stat.Starting, 0);
+        this.#totals.Skills = skills.reduce((total, stat) => total + stat.Starting, 0);
+        this.#totals.Improvement = this.#stats.reduce((total, stat) => total + stat.Improvement, 0);
+        this.#totals.CharacterPoints = this.#stats.reduce((total, stat) => total + stat.CharacterPoints, 0);
+
+        this.#totals.Attributes = this.#totals.AttributesSpecies + this.#totals.AttributesStarting;
+        this.#totals.Dice = this.#totals.Attributes + this.#totals.Skills + this.#totals.Improvement;
     }
 
     toJSON() {
