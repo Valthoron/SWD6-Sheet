@@ -59,6 +59,7 @@ export class SheetController extends View {
         row.onNameChange = (newName) => this._rowNameChange(stat, newName);
         row.onTypeChange = (newType) => this._rowTypeChange(stat, newType);
         row.onModifierChange = (modifier, delta) => this._rowModifierChange(stat, modifier, delta);
+        row.onAddStat = () => this._rowAddStat(stat);
 
         if (stat.Base !== "")
             this._rows[stat.Base].appendChild(row);
@@ -66,6 +67,8 @@ export class SheetController extends View {
             this.appendChild(row);
 
         this._rows[stat.Name] = row;
+
+        return row;
     }
 
     _rowNameChange(stat, newName) {
@@ -79,6 +82,31 @@ export class SheetController extends View {
 
     _rowModifierChange(stat, modifier, delta) {
         this._character.updateStatModifier(stat.Name, modifier, delta);
+        this.refresh();
+    }
+
+    _rowAddStat(parentStat) {
+        if (parentStat.Type === "Attribute") {
+            const stat = this._character.addStat({
+                Type: "Skill",
+                Name: "New Skill",
+                Base: parentStat.Name
+            });
+
+            const row = this._createStatRow(SkillRow, stat);
+            row.beginRenameAndSelect();
+
+        } else if ((parentStat.Type === "Skill") || (parentStat.Type === "AdvancedSkill")) {
+            const stat = this._character.addStat({
+                Type: "Specialization",
+                Name: "New Specialization",
+                Base: parentStat.Name
+            });
+
+            const row = this._createStatRow(SpecRow, stat);
+            row.beginRenameAndSelect();
+        }
+
         this.refresh();
     }
 

@@ -38,6 +38,7 @@
 - Prefer to add new elements in HTML, unless dynamic instantiation is a requirement
 - Prefer guard clauses and early returns when generating functions with multiple return paths or null checks
 - Never trust operator precedence, use parentheses to clarify order of operations
+- When using logical operators with comparison operators, always wrap each comparison in its own set of parentheses
 
 ## Naming and Syntax
 - camelCase for file names (except class files)

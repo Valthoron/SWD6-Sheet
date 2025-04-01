@@ -10,6 +10,7 @@ export class StatRow extends View {
     _valueLabel = null;
 
     _renameButton = null;
+    _addButton = null;
     _nameEditContainer = null;
     _nameInput = null;
     _nameSaveButton = null;
@@ -23,6 +24,7 @@ export class StatRow extends View {
     onNameChange = null;
     onTypeChange = null;
     onModifierChange = null;
+    onAddStat = null;
 
     constructor() {
         super(Templates.getInstance().get("statRow").cloneNode(true));
@@ -31,6 +33,7 @@ export class StatRow extends View {
         this._valueLabel = this._element.querySelector(".stat-row__value");
 
         this._renameButton = this._element.querySelector(".stat-row__rename-button");
+        this._addButton = this._element.querySelector(".stat-row__add-button");
         this._nameEditContainer = this._element.querySelector(".stat-row__name-edit");
         this._nameInput = this._element.querySelector(".stat-row__name-input");
         this._nameSaveButton = this._element.querySelector(".stat-row__name-save-button");
@@ -57,6 +60,7 @@ export class StatRow extends View {
 
     _setupEventListeners() {
         this._renameButton.addEventListener("click", () => this._beginRename());
+        this._addButton.addEventListener("click", () => this._addStat());
         this._nameSaveButton.addEventListener("click", () => this._saveName());
         this._nameRevertButton.addEventListener("click", () => this._revertName());
 
@@ -84,6 +88,11 @@ export class StatRow extends View {
         });
     }
 
+    beginRenameAndSelect() {
+        this._beginRename();
+        this._nameInput.select();
+    }
+
     _createModifierRow(modifierName, displayMode) {
         const row = new StatModifierRow().initialize({ name: modifierName, displayMode: displayMode });
         row.onChange = (modifier, delta) => this._modifierChange(modifier, delta);
@@ -100,6 +109,7 @@ export class StatRow extends View {
 
         this._nameLabel.style.display = "none";
         this._renameButton.style.display = "none";
+        this._addButton.style.display = "none";
         this._nameEditContainer.style.display = "";
         this._nameInput.focus();
     }
@@ -107,6 +117,7 @@ export class StatRow extends View {
     _endRename() {
         this._nameLabel.style.display = "";
         this._renameButton.style.display = "";
+        this._addButton.style.display = "";
         this._nameEditContainer.style.display = "none";
     }
 
@@ -128,6 +139,10 @@ export class StatRow extends View {
     _toggleAdvancedSkill() {
         const newType = this._advancedCheckbox.checked ? "AdvancedSkill" : "Skill";
         this.onTypeChange?.(newType);
+    }
+
+    _addStat() {
+        this.onAddStat?.();
     }
 }
 

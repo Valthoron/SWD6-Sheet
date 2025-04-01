@@ -63,6 +63,13 @@ export class Character {
         this.calculate();
     }
 
+    addStat(statData) {
+        const newStat = new CharacterStat(this, statData);
+        this.#stats.push(newStat);
+        this.calculate();
+        return newStat;
+    }
+
     calculate() {
         this.#stats.forEach(stat => { stat.calculate(this); });
 
