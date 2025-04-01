@@ -37,7 +37,7 @@
 - Keep main app.js file as a coordinator that uses classes/functions from other files
 - Prefer to add new elements in HTML, unless dynamic instantiation is a requirement
 - Prefer guard clauses and early returns when generating functions with multiple return paths or null checks
-- Never trust operator precedence, always use parentheses to clarify order of operations
+- Never trust operator precedence, use parentheses to clarify order of operations
 
 ## Naming and Syntax
 - camelCase for file names (except class files)
@@ -54,11 +54,11 @@
 - Don't shorten names unless established by the project (e.g. text not txt, button not btn)
 
 ## Comments
-- Write short but explanatory comments for each function and code section you generate
-- Only write comments for single lines when the code is complicated or non-intuitive; avoid commenting when the code is self-explanatory
+- Write comments for lines or code sections only when they are not self-explanatory, complicated or non-intuitive
+- Comments should be concise but but explanatory
 - Comments regarding functions/methods should be below the function/method name, inside the scope braces
 - Don't write placeholder comments for removed code
-- Use single-line comments instead of comment blocks unless strictly necessary
+- Prefer per-line commenting (//) instead of comment blocks (/* */) for JavaScript
 
 ## Error Handling
 - Use try-catch blocks for operations that may fail

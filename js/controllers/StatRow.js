@@ -54,6 +54,16 @@ export class StatRow extends View {
         this._renameButton.addEventListener("click", () => this._beginRename());
         this._nameSaveButton.addEventListener("click", () => this._saveName());
         this._nameRevertButton.addEventListener("click", () => this._revertName());
+
+        this._nameInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                this._saveName();
+            } else if (event.key === "Escape") {
+                event.preventDefault();
+                this._revertName();
+            }
+        });
     }
 
     refresh() {
