@@ -36,6 +36,8 @@
 - Keep files small and focused
 - Keep main app.js file as a coordinator that uses classes/functions from other files
 - Prefer to add new elements in HTML, unless dynamic instantiation is a requirement
+- Prefer guard clauses and early returns when generating functions with multiple return paths or null checks
+- Never trust operator precedence, always use parentheses to clarify order of operations
 
 ## Naming and Syntax
 - camelCase for file names (except class files)
@@ -45,10 +47,11 @@
 - kebab-case for CSS classes
 - kebab-case for HTML element id's
 - Use BEM methodology for CSS class naming (Block__Element--Modifier)
-- Prefer double quotes (") over single quotes (') whenever possible and valid.
+- Prefer double quotes (") over single quotes (') whenever possible and valid
 - Prefix private methods and properties with hash mark (#)
 - Prefix protected methods and properties with underscore (_)
 - Use descriptive, action-oriented names for event handlers (e.g., handleStatChange)
+- Don't shorten names unless established by the project (e.g. text not txt, button not btn)
 
 ## Comments
 - Write short but explanatory comments for each function and code section you generate

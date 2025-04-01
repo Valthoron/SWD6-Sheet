@@ -88,6 +88,9 @@ body {
     width: 450px;
 }
 
+/*
+ ********** Stat Row **********
+ */
 .stat-row {
     box-shadow: 0px 1px rgb(128, 128, 128) inset;
     display: flex;
@@ -117,6 +120,41 @@ body {
     margin-left: auto;
 }
 
+.stat-row button {
+    background-color: rgb(255, 140, 0);
+    border: 0px;
+    color: black;
+    font-family: inherit;
+    font-weight: 800;
+    height: 25px;
+    width: 30px;
+}
+
+
+body[mode="view"] .stat-row button {
+    display: none;
+}
+
+.stat-row button:hover {
+    background-color: rgb(255, 165, 0);
+}
+
+.stat-row button:active {
+    background-color: rgb(255, 190, 0);
+}
+
+.stat-row__name-edit {
+    align-items: center;
+}
+
+.stat-row__name-input {
+    margin-right: 5px;
+    width: 150px;
+}
+
+/*
+ ********** Stat Modifier Row  **********
+ */
 .stat-modifier-row {
     display: flex;
     font-size: 14pt;
@@ -127,6 +165,21 @@ body {
     overflow: hidden;
     transition: height 0.2s, opacity 0.2s;
     width: 100%;
+}
+
+body[mode="view"] .stat-modifier-row {
+    height: 0;
+    opacity: 0;
+}
+
+body[mode="create"] .stat-modifier-row--create {
+    height: 36px;
+    opacity: 1;
+}
+
+body[mode="advance"] .stat-modifier-row--advance {
+    height: 36px;
+    opacity: 1;
 }
 
 .stat-modifier-row__name {
@@ -164,22 +217,4 @@ body {
     margin-left: 0px;
     text-align: left;
     width: 70px;
-}
-
-/*
- ********** Mode-based Display **********
- */
-body[mode="view"] .stat-modifier-row {
-    height: 0;
-    opacity: 0;
-}
-
-body[mode="create"] .stat-modifier-row--create {
-    height: 36px;
-    opacity: 1;
-}
-
-body[mode="advance"] .stat-modifier-row--advance {
-    height: 36px;
-    opacity: 1;
 }

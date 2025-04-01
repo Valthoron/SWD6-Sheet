@@ -35,6 +35,25 @@ export class Character {
         return this.#stats.filter(stat => stat.Base === base);
     }
 
+    updateStatName(name, newName) {
+        const stat = this.getStat(name);
+
+        if (!stat) return;
+
+        stat.Name = newName;
+        this.#stats.forEach(stat => { if (stat.Base === name) stat.Base = newName; });
+    }
+
+    updateStatModifier(name, modifier, delta) {
+        const stat = this.getStat(name);
+
+        if (!stat) return;
+        if (!(modifier in stat)) return;
+
+        stat[modifier] = Math.max(stat[modifier] + delta, 0);
+        this.calculate();
+    }
+
     calculate() {
         this.#stats.forEach(stat => { stat.calculate(this); });
 

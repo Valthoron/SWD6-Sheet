@@ -33,10 +33,16 @@ export class CharacterStat {
     }
 
     get Name() { return (this.#type === "AdvancedSkill" ? "(A) " : "") + this.#name; }
+    set Name(value) { this.#name = value; }
+
     get Type() { return this.#type; }
+    set Type(value) { this.#type = value; }
+
     get Base() { return this.#base; }
+    set Base(value) { this.#base = value; }
 
     get BaseStarting() { return this.#baseStarting; }
+    set BaseStarting(value) { this.#baseStarting = value; }
 
     get Species() { return this.#species; }
     set Species(value) { this.#species = value; }

@@ -55,7 +55,9 @@ export class SheetController extends View {
 
     _createStatRow(rowType, stat) {
         const row = new rowType().initialize(stat);
-        row.onChange = (modifier, delta) => this.#rowModifierChange(stat, modifier, delta);
+
+        row.onNameChange = (newName) => this._rowNameChange(stat, newName);
+        row.onModifierChange = (modifier, delta) => this._rowModifierChange(stat, modifier, delta);
 
         if (stat.Base !== "")
             this._rows[stat.Base].appendChild(row);
@@ -65,18 +67,18 @@ export class SheetController extends View {
         this._rows[stat.Name] = row;
     }
 
-    #rowModifierChange(stat, modifier, delta) {
-        stat[modifier] += delta;
-        this._character.calculate();
+    _rowNameChange(stat, newName) {
+        this._character.updateStatName(stat.Name, newName);
+    }
+
+    _rowModifierChange(stat, modifier, delta) {
+        this._character.updateStatModifier(stat.Name, modifier, delta);
         this.refresh();
     }
 
     refresh() {
         Object.values(this._rows).forEach(row => row.refresh());
-        this._refreshTotals();
-    }
 
-    _refreshTotals() {
         this._totalAttributesSpeciesElement.textContent = pipsToDice(this._character.Totals.AttributesSpecies);
         this._totalAttributesStartingElement.textContent = pipsToDice(this._character.Totals.AttributesStarting);
         this._totalSkillsElement.textContent = pipsToDice(this._character.Totals.Skills);
