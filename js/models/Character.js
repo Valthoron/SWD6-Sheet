@@ -54,6 +54,15 @@ export class Character {
         this.calculate();
     }
 
+    updateStatType(name, newType) {
+        const stat = this.getStat(name);
+
+        if (!stat) return;
+
+        stat.Type = newType;
+        this.calculate();
+    }
+
     calculate() {
         this.#stats.forEach(stat => { stat.calculate(this); });
 

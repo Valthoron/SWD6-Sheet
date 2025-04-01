@@ -57,6 +57,7 @@ export class SheetController extends View {
         const row = new rowType().initialize(stat);
 
         row.onNameChange = (newName) => this._rowNameChange(stat, newName);
+        row.onTypeChange = (newType) => this._rowTypeChange(stat, newType);
         row.onModifierChange = (modifier, delta) => this._rowModifierChange(stat, modifier, delta);
 
         if (stat.Base !== "")
@@ -69,6 +70,11 @@ export class SheetController extends View {
 
     _rowNameChange(stat, newName) {
         this._character.updateStatName(stat.Name, newName);
+    }
+
+    _rowTypeChange(stat, newType) {
+        this._character.updateStatType(stat.Name, newType);
+        this.refresh();
     }
 
     _rowModifierChange(stat, modifier, delta) {

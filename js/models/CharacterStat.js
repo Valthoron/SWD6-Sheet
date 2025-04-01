@@ -32,7 +32,7 @@ export class CharacterStat {
         this.#improvement = data.Improvement || 0;
     }
 
-    get Name() { return (this.#type === "AdvancedSkill" ? "(A) " : "") + this.#name; }
+    get Name() { return this.#name; }
     set Name(value) { this.#name = value; }
 
     get Type() { return this.#type; }

@@ -152,6 +152,14 @@ body[mode="view"] .stat-row button {
     width: 150px;
 }
 
+.stat-row__advanced-toggle {
+    font-size: 11pt;
+}
+
+body[mode="view"] .stat-row__advanced-toggle {
+    display: none;
+}
+
 /*
  ********** Stat Modifier Row  **********
  */

@@ -15,10 +15,14 @@ export class StatRow extends View {
     _nameSaveButton = null;
     _nameRevertButton = null;
 
+    _advancedToggle = null;
+    _advancedCheckbox = null;
+
     _modifierRows = {};
 
-    onModifierChange = null;
     onNameChange = null;
+    onTypeChange = null;
+    onModifierChange = null;
 
     constructor() {
         super(Templates.getInstance().get("statRow").cloneNode(true));
@@ -31,15 +35,16 @@ export class StatRow extends View {
         this._nameInput = this._element.querySelector(".stat-row__name-input");
         this._nameSaveButton = this._element.querySelector(".stat-row__name-save-button");
         this._nameRevertButton = this._element.querySelector(".stat-row__name-revert-button");
+
+        this._advancedToggle = this._element.querySelector(".stat-row__advanced-toggle");
+        this._advancedCheckbox = this._element.querySelector(".stat-row__advanced-checkbox");
     }
 
     initialize(stat) {
         super.initialize();
 
         this._stat = stat;
-
         this._nameLabel.textContent = stat.Name;
-        this._nameEditContainer.style.display = "none";
 
         return this;
     }
@@ -64,6 +69,8 @@ export class StatRow extends View {
                 this._revertName();
             }
         });
+
+        this._advancedCheckbox.addEventListener("change", () => this._toggleAdvancedSkill());
     }
 
     refresh() {
@@ -117,14 +124,20 @@ export class StatRow extends View {
     _revertName() {
         this._endRename();
     }
+
+    _toggleAdvancedSkill() {
+        const newType = this._advancedCheckbox.checked ? "AdvancedSkill" : "Skill";
+        this.onTypeChange?.(newType);
+    }
 }
 
 export class AttributeRow extends StatRow {
     initialize(stat) {
         super.initialize(stat);
 
-        this._renameButton.remove()
-        this._nameEditContainer.remove()
+        this._renameButton.remove();
+        this._nameEditContainer.remove();
+        this._advancedToggle.remove();
 
         return this;
     }
@@ -142,8 +155,30 @@ export class SkillRow extends StatRow {
         this._nameLabel.classList.add("stat-row__name--skill");
     }
 
+    initialize(stat) {
+        super.initialize(stat);
+
+        if (stat.Type === "AdvancedSkill") {
+            this._nameLabel.textContent = "(A) " + stat.Name;
+            this._advancedCheckbox.checked = true;
+        }
+
+        this._nameEditContainer.style.display = "none";
+
+        return this;
+    }
+
     _initializeChildViews() {
         super._initializeChildViews();
+    }
+
+    refresh() {
+        super.refresh();
+
+        if (this._stat.Type === "AdvancedSkill")
+            this._nameLabel.textContent = "(A) " + this._stat.Name;
+        else
+            this._nameLabel.textContent = this._stat.Name;
     }
 }
 
@@ -151,6 +186,15 @@ export class SpecRow extends StatRow {
     constructor() {
         super();
         this._nameLabel.classList.add("stat-row__name--spec");
+    }
+
+    initialize(stat) {
+        super.initialize(stat);
+
+        this._nameEditContainer.style.display = "none";
+        this._advancedToggle.remove();
+
+        return this;
     }
 
     _initializeChildViews() {
