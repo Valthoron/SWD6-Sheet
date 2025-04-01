@@ -60,6 +60,7 @@ export class SheetController extends View {
         row.onTypeChange = (newType) => this._rowTypeChange(stat, newType);
         row.onModifierChange = (modifier, delta) => this._rowModifierChange(stat, modifier, delta);
         row.onAddStat = () => this._rowAddStat(stat);
+        row.onRemoveStat = () => this._rowRemoveStat(stat);
 
         if (stat.Base !== "")
             this._rows[stat.Base].appendChild(row);
@@ -106,6 +107,17 @@ export class SheetController extends View {
             const row = this._createStatRow(SpecRow, stat);
             row.beginRenameAndSelect();
         }
+
+        this.refresh();
+    }
+
+    _rowRemoveStat(stat) {
+        const statsToRemove = this._character.removeStat(stat.Name);
+
+        statsToRemove.forEach(statName => {
+            this._rows[statName].removeFromParent();
+            delete this._rows[statName];
+        });
 
         this.refresh();
     }

@@ -11,6 +11,8 @@ export class StatRow extends View {
 
     _renameButton = null;
     _addButton = null;
+    _removeButton = null;
+    _confirmRemoveButton = null;
     _nameEditContainer = null;
     _nameInput = null;
     _nameSaveButton = null;
@@ -25,6 +27,7 @@ export class StatRow extends View {
     onTypeChange = null;
     onModifierChange = null;
     onAddStat = null;
+    onRemoveStat = null;
 
     constructor() {
         super(Templates.getInstance().get("statRow").cloneNode(true));
@@ -34,6 +37,8 @@ export class StatRow extends View {
 
         this._renameButton = this._element.querySelector(".stat-row__rename-button");
         this._addButton = this._element.querySelector(".stat-row__add-button");
+        this._removeButton = this._element.querySelector(".stat-row__remove-button");
+        this._confirmRemoveButton = this._element.querySelector(".stat-row__confirm-remove-button");
         this._nameEditContainer = this._element.querySelector(".stat-row__name-edit");
         this._nameInput = this._element.querySelector(".stat-row__name-input");
         this._nameSaveButton = this._element.querySelector(".stat-row__name-save-button");
@@ -49,6 +54,9 @@ export class StatRow extends View {
         this._stat = stat;
         this._nameLabel.textContent = stat.Name;
 
+        // Hide confirm remove button by default
+        this._confirmRemoveButton.style.display = "none";
+
         return this;
     }
 
@@ -63,6 +71,8 @@ export class StatRow extends View {
         this._addButton.addEventListener("click", () => this._addStat());
         this._nameSaveButton.addEventListener("click", () => this._saveName());
         this._nameRevertButton.addEventListener("click", () => this._revertName());
+        this._removeButton.addEventListener("click", () => this._toggleRemove());
+        this._confirmRemoveButton.addEventListener("click", () => this._confirmRemove());
 
         this._nameInput.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
@@ -110,6 +120,7 @@ export class StatRow extends View {
         this._nameLabel.style.display = "none";
         this._renameButton.style.display = "none";
         this._addButton.style.display = "none";
+        this._removeButton.style.display = "none";
         this._nameEditContainer.style.display = "";
         this._nameInput.focus();
     }
@@ -118,6 +129,7 @@ export class StatRow extends View {
         this._nameLabel.style.display = "";
         this._renameButton.style.display = "";
         this._addButton.style.display = "";
+        this._removeButton.style.display = "";
         this._nameEditContainer.style.display = "none";
     }
 
@@ -144,6 +156,24 @@ export class StatRow extends View {
     _addStat() {
         this.onAddStat?.();
     }
+
+    _toggleRemove() {
+        if (this._removeButton.classList.contains("stat-row__remove-button--cancel")) {
+            // Cancel removal
+            this._removeButton.classList.remove("stat-row__remove-button--cancel");
+            this._removeButton.textContent = "–";
+            this._confirmRemoveButton.style.display = "none";
+        } else {
+            // Initiate removal
+            this._removeButton.classList.add("stat-row__remove-button--cancel");
+            this._removeButton.textContent = "✕";
+            this._confirmRemoveButton.style.display = "";
+        }
+    }
+
+    _confirmRemove() {
+        this.onRemoveStat?.();
+    }
 }
 
 export class AttributeRow extends StatRow {
@@ -153,6 +183,8 @@ export class AttributeRow extends StatRow {
         this._renameButton.remove();
         this._nameEditContainer.remove();
         this._advancedToggle.remove();
+        this._removeButton.remove();
+        this._confirmRemoveButton.remove();
 
         return this;
     }

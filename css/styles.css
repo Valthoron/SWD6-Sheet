@@ -247,3 +247,59 @@ body[mode="advance"] .stat-modifier-row--advance {
     text-align: left;
     width: 70px;
 }
+
+.stat-row__remove-button {
+    background-color: rgb(220, 50, 50);
+    border: 0px;
+    color: white;
+    font-family: inherit;
+    font-weight: 800;
+    height: 25px;
+    width: 30px;
+}
+
+.stat-row__remove-button:hover {
+    background-color: rgb(240, 70, 70);
+}
+
+.stat-row__remove-button:active {
+    background-color: rgb(255, 90, 90);
+}
+
+.stat-row__remove-button--cancel {
+    background-color: rgb(100, 100, 100);
+}
+
+.stat-row__remove-button--cancel:hover {
+    background-color: rgb(130, 130, 130);
+}
+
+.stat-row__remove-button--cancel:active {
+    background-color: rgb(160, 160, 160);
+}
+
+.stat-row__confirm-remove-button {
+    background-color: rgb(220, 50, 50);
+    border: 0px;
+    color: white;
+    font-family: inherit;
+    font-weight: 800;
+    height: 25px;
+    width: 30px;
+}
+
+.stat-row__confirm-remove-button:hover {
+    background-color: rgb(240, 70, 70);
+}
+
+.stat-row__confirm-remove-button:active {
+    background-color: rgb(255, 90, 90);
+}
+
+body[mode="view"] .stat-row__remove-button {
+    display: none;
+}
+
+body[mode="view"] .stat-row__confirm-remove-button {
+    display: none;
+}

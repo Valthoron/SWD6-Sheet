@@ -70,6 +70,14 @@ export class Character {
         return newStat;
     }
 
+    removeStat(name) {
+        let statsToRemove = [name];
+        this.getStatsWithBase(name).forEach(stat => statsToRemove.push(stat.Name));
+        this.#stats = this.#stats.filter(stat => !statsToRemove.includes(stat.Name));
+        this.calculate();
+        return statsToRemove;
+    }
+
     calculate() {
         this.#stats.forEach(stat => { stat.calculate(this); });
 
