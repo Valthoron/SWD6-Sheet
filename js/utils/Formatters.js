@@ -1,9 +1,24 @@
 export function pipsToDice(totalPips) {
-    let dice = Math.floor(totalPips / 3);
-    let pips = totalPips % 3;
+    // Early return for zero
+    if (totalPips === 0)
+        return "0";
 
-    if (pips === 0)
-        return dice + "D";
+    // Handle negative values
+    const isNegative = totalPips < 0;
+    const absolutePips = Math.abs(totalPips);
 
-    return dice + "D+" + pips;
+    // Calculate dice and remaining pips
+    const dice = Math.floor(absolutePips / 3);
+    const pips = absolutePips % 3;
+
+    // Form the result
+    let result = "";
+
+    if (dice > 0)
+        result = (isNegative ? "-" : "") + dice + "D";
+
+    if (pips > 0)
+        result += (isNegative ? "-" : "+") + pips;
+
+    return result;
 }

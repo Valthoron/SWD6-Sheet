@@ -50,7 +50,11 @@ export class Character {
         if (!stat) return;
         if (!(modifier in stat)) return;
 
-        stat[modifier] = Math.max(stat[modifier] + delta, 0);
+        stat[modifier] += delta;
+
+        if ((stat[modifier] < 0) && (modifier !== "Bonus"))
+            stat[modifier] = 0;
+
         this.calculate();
     }
 
