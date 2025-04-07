@@ -53,6 +53,7 @@
 - Prefix protected methods and properties with underscore (_)
 - Use descriptive, action-oriented names for event handlers (e.g., handleStatChange)
 - Don't shorten names unless established by the project (e.g. text not txt, button not btn)
+- Keep conditional/loop structures (if, for, while, etc.) with a single statement uncurled (no braces), with the statement on a new line
 
 ## Comments
 - Write comments for lines or code sections only when they are not self-explanatory, complicated or non-intuitive
