@@ -13,17 +13,17 @@ export class SheetController extends View {
     _totalDiceElement = null;
     _totalCharacterPointsElement = null;
 
-    constructor(character, sheetElement) {
+    constructor(character, sheetElement, navBar, statusBar) {
         super(sheetElement);
         this._character = character;
 
         // Statistics / totals
-        this._totalAttributesSpeciesElement = this._element.querySelector('#stat-total-attributes-species');
-        this._totalAttributesStartingElement = this._element.querySelector('#stat-total-attributes-starting');
-        this._totalSkillsElement = this._element.querySelector('#stat-total-skills');
-        this._totalImprovementElement = this._element.querySelector('#stat-total-improvement');
-        this._totalDiceElement = this._element.querySelector('#stat-total-dice');
-        this._totalCharacterPointsElement = this._element.querySelector('#stat-total-character-points');
+        this._totalAttributesSpeciesElement = statusBar.querySelector('#stat-total-attributes-species');
+        this._totalAttributesStartingElement = statusBar.querySelector('#stat-total-attributes-starting');
+        this._totalSkillsElement = statusBar.querySelector('#stat-total-skills');
+        this._totalImprovementElement = statusBar.querySelector('#stat-total-improvement');
+        this._totalDiceElement = statusBar.querySelector('#stat-total-dice');
+        this._totalCharacterPointsElement = statusBar.querySelector('#stat-total-character-points');
     }
 
     initialize() {
