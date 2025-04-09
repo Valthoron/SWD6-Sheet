@@ -12,17 +12,50 @@ export class Templates {
     }
 
     #initialize() {
-        this.#templates.set('statRow', document.getElementById('template-stat-row'));
-        this.#templates.set('statModifierRow', document.getElementById('template-stat-modifier-row'));
+        this.#addTemplate("statRow", "template-stat-row");
+        this.#addTemplate("statModifierRow", "template-stat-modifier-row");
+    }
+
+    #addTemplate(templateName, elementId) {
+        const template = document.getElementById(elementId);
+        template.removeAttribute("id");
+        template.remove();
+        this.#templates.set(templateName, template);
     }
 
     get(templateName) {
         const template = this.#templates.get(templateName);
 
         if (!template) {
-            throw new Error(`Template '${templateName}' not found`);
+            throw new Error(`Template "${templateName}" not found`);
         }
 
-        return template;
+        const element = template.cloneNode(true);
+
+        element.querySelectorAll("[id]").forEach(child => {
+            child.removeAttribute("id");
+        });
+
+        return element;
+    }
+
+    getWithChildMap(templateName) {
+        const template = this.#templates.get(templateName);
+
+        if (!template) {
+            throw new Error(`Template "${templateName}" not found`);
+        }
+
+        const element = template.cloneNode(true);
+
+        const childMap = new Map();
+
+        element.querySelectorAll("[id]").forEach(child => {
+            const id = child.getAttribute("id");
+            childMap.set(id, child);
+            child.removeAttribute("id");
+        });
+
+        return [element, childMap];
     }
 }

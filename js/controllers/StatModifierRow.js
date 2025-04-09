@@ -11,7 +11,8 @@ export class StatModifierRow extends View {
     onChange = null;
 
     constructor() {
-        super(Templates.getInstance().get("statModifierRow").cloneNode(true));
+        const [element, childMap] = Templates.getInstance().getWithChildMap("statModifierRow");
+        super(element);
 
         this._nameLabel = this._element.querySelector(".stat-modifier-row__name");
         this._valueLabel = this._element.querySelector(".stat-modifier-row__value");

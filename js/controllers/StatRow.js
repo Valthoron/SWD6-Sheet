@@ -30,7 +30,8 @@ export class StatRow extends View {
     onRemoveStat = null;
 
     constructor() {
-        super(Templates.getInstance().get("statRow").cloneNode(true));
+        const [element, _] = Templates.getInstance().getWithChildMap("statRow");
+        super(element);
 
         this._nameLabel = this._element.querySelector(".stat-row__name");
         this._valueLabel = this._element.querySelector(".stat-row__value");
