@@ -63,7 +63,7 @@ export class SheetController extends View {
         row.onRemoveStat = () => this._rowRemoveStat(stat);
 
         if (stat.Base !== "")
-            this._rows[stat.Base].appendChild(row);
+            this._rows[stat.Base].appendChild(row, "stat-container");
         else
             this.appendChild(row);
 

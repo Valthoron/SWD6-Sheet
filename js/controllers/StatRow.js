@@ -5,24 +5,30 @@ import { View } from "./View.js";
 
 export class StatRow extends View {
     _stat = null;
+    _modifierRows = {};
 
+    // Elements
     _nameLabel = null;
     _valueLabel = null;
 
     _renameButton = null;
-    _addButton = null;
-    _removeButton = null;
-    _confirmRemoveButton = null;
     _nameEditContainer = null;
     _nameInput = null;
     _nameSaveButton = null;
     _nameRevertButton = null;
 
+    _removeButton = null;
+    _confirmRemoveButton = null;
+
     _advancedToggle = null;
     _advancedCheckbox = null;
 
-    _modifierRows = {};
+    _modifierContainer = null;
+    _statContainer = null;
 
+    _addButton = null;
+
+    // Events
     onNameChange = null;
     onTypeChange = null;
     onModifierChange = null;
@@ -30,23 +36,32 @@ export class StatRow extends View {
     onRemoveStat = null;
 
     constructor() {
-        const [element, _] = Templates.getInstance().getWithChildMap("statRow");
+        const [element, childMap] = Templates.getInstance().getWithChildMap("statRow");
         super(element);
 
-        this._nameLabel = this._element.querySelector(".stat-row__name");
-        this._valueLabel = this._element.querySelector(".stat-row__value");
+        this._nameLabel = this._element.querySelector(".stat-row__name-label");
+        this._valueLabel = this._element.querySelector(".stat-row__value-label");
 
-        this._renameButton = this._element.querySelector(".stat-row__rename-button");
-        this._addButton = this._element.querySelector(".stat-row__add-button");
-        this._removeButton = this._element.querySelector(".stat-row__remove-button");
+        this._buttonContainer = this._element.querySelector(".stat-row__buttons");
+        this._renameButton = childMap.get("stat-row-rename-button");
+        this._removeButton = childMap.get("stat-row-remove-button");
+        this._abortRemoveButton = this._element.querySelector(".stat-row__abort-remove-button");
         this._confirmRemoveButton = this._element.querySelector(".stat-row__confirm-remove-button");
+
         this._nameEditContainer = this._element.querySelector(".stat-row__name-edit");
         this._nameInput = this._element.querySelector(".stat-row__name-input");
-        this._nameSaveButton = this._element.querySelector(".stat-row__name-save-button");
-        this._nameRevertButton = this._element.querySelector(".stat-row__name-revert-button");
+        this._nameSaveButton = childMap.get("stat-row-name-save-button");
+        this._nameRevertButton = childMap.get("stat-row-name-revert-button");
 
-        this._advancedToggle = this._element.querySelector(".stat-row__advanced-toggle");
-        this._advancedCheckbox = this._element.querySelector(".stat-row__advanced-checkbox");
+        this._advancedToggle = this._element.querySelector(".stat-row__advanced-checkbox");
+        this._advancedCheckbox = childMap.get("stat-row-advanced-checkbox");
+
+        this._modifierContainer = this._element.querySelector(".stat-row__modifier-container");
+        this._registerContainer("modifier-container", this._modifierContainer);
+        this._statContainer = this._element.querySelector(".stat-row__stat-container");
+        this._registerContainer("stat-container", this._statContainer);
+
+        this._addButton = this._element.querySelector(".stat-row__add-button");
     }
 
     initialize(stat) {
@@ -55,8 +70,7 @@ export class StatRow extends View {
         this._stat = stat;
         this._nameLabel.textContent = stat.Name;
 
-        // Hide confirm remove button by default
-        this._confirmRemoveButton.style.display = "none";
+        //this._confirmRemoveButton.style.display = "none";
 
         return this;
     }
@@ -67,13 +81,16 @@ export class StatRow extends View {
         this._createModifierRow("Bonus", "create");
     }
 
-    _setupEventListeners() {
-        this._renameButton.addEventListener("click", () => this._beginRename());
+    _setupEventListeners_Add() {
         this._addButton.addEventListener("click", () => this._addStat());
+    }
+
+    _setupEventListeners_Rename() {
+        this._nameLabel.addEventListener("click", () => this._beginRename());
+        this._nameInput.addEventListener("blur", () => this._revertName());
+        this._renameButton.addEventListener("click", () => this._beginRename());
         this._nameSaveButton.addEventListener("click", () => this._saveName());
         this._nameRevertButton.addEventListener("click", () => this._revertName());
-        this._removeButton.addEventListener("click", () => this._toggleRemove());
-        this._confirmRemoveButton.addEventListener("click", () => this._confirmRemove());
 
         this._nameInput.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
@@ -84,7 +101,15 @@ export class StatRow extends View {
                 this._revertName();
             }
         });
+    }
 
+    _setupEventListeners_Remove() {
+        this._removeButton.addEventListener("click", () => this._beginRemove());
+        this._abortRemoveButton.addEventListener("click", () => this._abortRemove());
+        this._confirmRemoveButton.addEventListener("click", () => this._confirmRemove());
+    }
+
+    _setupEventListeners_AdvancedSkill() {
         this._advancedCheckbox.addEventListener("change", () => this._toggleAdvancedSkill());
     }
 
@@ -107,7 +132,7 @@ export class StatRow extends View {
     _createModifierRow(modifierName, displayMode) {
         const row = new StatModifierRow().initialize({ name: modifierName, displayMode: displayMode });
         row.onChange = (modifier, delta) => this._modifierChange(modifier, delta);
-        this.appendChild(row);
+        this.appendChild(row, "modifier-container");
         this._modifierRows[modifierName] = row;
     }
 
@@ -116,21 +141,25 @@ export class StatRow extends View {
     }
 
     _beginRename() {
+        if (document.body.getAttribute("mode") === "view")
+            return;
+
         this._nameInput.value = this._stat.Name;
+        this._nameInput.setSelectionRange(-1, -1);
 
         this._nameLabel.style.display = "none";
-        this._renameButton.style.display = "none";
-        this._addButton.style.display = "none";
-        this._removeButton.style.display = "none";
-        this._nameEditContainer.style.display = "";
+        this._buttonContainer.style.display = "none";
+        this._nameEditContainer.style.display = "block";
+
         this._nameInput.focus();
     }
 
     _endRename() {
-        this._nameLabel.style.display = "";
-        this._renameButton.style.display = "";
-        this._addButton.style.display = "";
-        this._removeButton.style.display = "";
+        this._nameInput.value = this._stat.Name;
+        this._nameInput.setSelectionRange(-1, -1);
+
+        this._nameLabel.style.display = "block";
+        this._buttonContainer.style.display = "flex";
         this._nameEditContainer.style.display = "none";
     }
 
@@ -158,18 +187,16 @@ export class StatRow extends View {
         this.onAddStat?.();
     }
 
-    _toggleRemove() {
-        if (this._removeButton.classList.contains("stat-row__remove-button--cancel")) {
-            // Cancel removal
-            this._removeButton.classList.remove("stat-row__remove-button--cancel");
-            this._removeButton.textContent = "–";
-            this._confirmRemoveButton.style.display = "none";
-        } else {
-            // Initiate removal
-            this._removeButton.classList.add("stat-row__remove-button--cancel");
-            this._removeButton.textContent = "✕";
-            this._confirmRemoveButton.style.display = "";
-        }
+    _beginRemove() {
+        this._removeButton.style.display = "none";
+        this._abortRemoveButton.style.display = "block";
+        this._confirmRemoveButton.style.display = "block";
+    }
+
+    _abortRemove() {
+        this._removeButton.style.display = "block";
+        this._abortRemoveButton.style.display = "none";
+        this._confirmRemoveButton.style.display = "none";
     }
 
     _confirmRemove() {
@@ -178,14 +205,15 @@ export class StatRow extends View {
 }
 
 export class AttributeRow extends StatRow {
+    constructor() {
+        super();
+        this._element.classList.add("stat-row--attribute");
+    }
+
     initialize(stat) {
         super.initialize(stat);
 
-        this._renameButton.remove();
-        this._nameEditContainer.remove();
-        this._advancedToggle.remove();
-        this._removeButton.remove();
-        this._confirmRemoveButton.remove();
+        this._addButton.textContent = `➕ ${stat.Name} skill`;
 
         return this;
     }
@@ -195,12 +223,17 @@ export class AttributeRow extends StatRow {
 
         super._initializeChildViews();
     }
+
+    _setupEventListeners() {
+        super._setupEventListeners();
+        this._setupEventListeners_Add();
+    }
 }
 
 export class SkillRow extends StatRow {
     constructor() {
         super();
-        this._nameLabel.classList.add("stat-row__name--skill");
+        this._element.classList.add("stat-row--skill");
     }
 
     initialize(stat) {
@@ -211,13 +244,17 @@ export class SkillRow extends StatRow {
             this._advancedCheckbox.checked = true;
         }
 
-        this._nameEditContainer.style.display = "none";
+        this._addButton.textContent = `➕ ${stat.Name} specialization`;
 
         return this;
     }
 
-    _initializeChildViews() {
-        super._initializeChildViews();
+    _setupEventListeners() {
+        super._setupEventListeners();
+        this._setupEventListeners_Add();
+        this._setupEventListeners_AdvancedSkill();
+        this._setupEventListeners_Rename();
+        this._setupEventListeners_Remove();
     }
 
     refresh() {
@@ -233,19 +270,12 @@ export class SkillRow extends StatRow {
 export class SpecRow extends StatRow {
     constructor() {
         super();
-        this._nameLabel.classList.add("stat-row__name--spec");
+        this._element.classList.add("stat-row--spec");
     }
 
-    initialize(stat) {
-        super.initialize(stat);
-
-        this._nameEditContainer.style.display = "none";
-        this._advancedToggle.remove();
-
-        return this;
-    }
-
-    _initializeChildViews() {
-        super._initializeChildViews();
+    _setupEventListeners() {
+        super._setupEventListeners();
+        this._setupEventListeners_Rename();
+        this._setupEventListeners_Remove();
     }
 }

@@ -14,12 +14,11 @@ export class StatModifierRow extends View {
         const [element, childMap] = Templates.getInstance().getWithChildMap("statModifierRow");
         super(element);
 
-        this._nameLabel = this._element.querySelector(".stat-modifier-row__name");
-        this._valueLabel = this._element.querySelector(".stat-modifier-row__value");
+        this._nameLabel = childMap.get("stat-modifier-row-name-label");
+        this._valueLabel = childMap.get("stat-modifier-row-value-label");
 
-        const buttons = this._element.querySelectorAll(".stat-modifier-row__button");
-        this._decreaseButton = buttons[0];
-        this._increaseButton = buttons[1];
+        this._decreaseButton = childMap.get("stat-modifier-row-decrement-button");
+        this._increaseButton = childMap.get("stat-modifier-row-increment-button");
     }
 
     initialize({ name, displayMode }) {

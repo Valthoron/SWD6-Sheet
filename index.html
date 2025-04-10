@@ -39,30 +39,61 @@
 
     <!-- Templates -->
     <div class="template-container">
+
+        <!-- Stat row -->
         <div class="stat-row" id="template-stat-row">
-            <div class="stat-row__name">Name</div>
-            <button class="stat-row__rename-button">✎</button>
-            <button class="stat-row__add-button">+</button>
-            <button class="stat-row__remove-button">&ndash;</button>
-            <button class="stat-row__confirm-remove-button">✓</button>
-            <div class="stat-row__name-edit">
-                <input type="text" class="stat-row__name-input">
-                <button class="stat-row__name-save-button">✔</button>
-                <button class="stat-row__name-revert-button">✖</button>
+            <div class="stat-row__main-container">
+                <div class="stat-row__buttons">
+                    <button id="stat-row-rename-button">✏️</button>
+                    <button id="stat-row-remove-button">🗑️</button>
+                    <button class="stat-row__abort-remove-button">❎</button>
+                    <button class="stat-row__confirm-remove-button">🗑️</button>
+                </div>
+
+                <div class="stat-row__name-label">Name</div>
+
+                <div class="stat-row__name-edit">
+                    <input type="text" class="stat-row__name-input">
+                    <button id="stat-row-name-save-button">✔️</button>
+                    <button id="stat-row-name-revert-button">❌</button>
+                </div>
+
+                <div class="stat-row__value-label">0D</div>
             </div>
-            <label class="stat-row__advanced-toggle">
-                <input type="checkbox" class="stat-row__advanced-checkbox">
-                <span class="stat-row__advanced-label">Advanced</span>
-            </label>
-            <div class="stat-row__value">0D</div>
+
+            <div class="collapse mode-create mode-advance">
+                <div></div>
+                <div class="stat-row__middle-container">
+                    <div class="stat-row__widget-container">
+                        <label class="stat-row__advanced-checkbox">
+                            <input type="checkbox" id="stat-row-advanced-checkbox">
+                            <span>Advanced</span>
+                        </label>
+                        <button class="stat-row__add-button">➕</button>
+                    </div>
+
+                    <div class="stat-row__modifier-container"></div>
+                </div>
+            </div>
+
+            <div class="stat-row__stat-container"></div>
+
+            <div class="collapse mode-create mode-advance">
+                <div></div>
+                <div class="stat-row__bottom-container">
+
+                </div>
+            </div>
         </div>
+
+        <!-- Stat modifier row -->
         <div class="stat-modifier-row" id="template-stat-modifier-row">
-            <div class="stat-modifier-row__name">name</div>
+            <div id="stat-modifier-row-name-label" class="stat-modifier-row__name">name</div>
             <div class="stat-modifier-row__buttons">
-                <button class="stat-modifier-row__button">&ndash;</button>
-                <button class="stat-modifier-row__button">+</button>
+                <button id="stat-modifier-row-decrement-button">&ndash;</button>
+                <button id="stat-modifier-row-increment-button">+</button>
             </div>
-            <div class="stat-modifier-row__value">0</div>
+            <div id="stat-modifier-row-value-label" class="stat-modifier-row__value">0</div>
         </div>
     </div>
 

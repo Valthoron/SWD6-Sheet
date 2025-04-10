@@ -1,14 +1,36 @@
 @import url("fonts.css");
 
 body {
-    background-color: rgb(64, 64, 64);
-    color: white;
-    font-family: "Tw Cen MT";
-    font-size: 19pt;
-    font-weight: bolder;
+    cursor: default;
     margin: 0;
+    background-color: rgb(64, 64, 64);
     padding-top: 60px;
     padding-bottom: 40px;
+    color: #eee;
+    font-size: 12pt;
+    font-family: "Tw Cen MT";
+    user-select: none;
+}
+
+/*div {
+    box-shadow: inset 0px 0px 0px 1px #f00;
+}*/
+
+.collapse {
+    display: grid;
+    grid-template-rows: min-content 0fr;
+    transition: grid-template-rows 0.2s;
+    width: 100%;
+}
+
+.collapse div {
+    overflow: hidden;
+}
+
+body[mode="view"] .mode-view,
+body[mode="create"] .mode-create,
+body[mode="advance"] .mode-advance {
+    grid-template-rows: min-content 1fr;
 }
 
 .template-container {
@@ -19,17 +41,17 @@ body {
  ********** Navbar **********
  */
 .navbar {
-    align-items: center;
-    background-color: #333;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     display: flex;
-    height: 50px;
-    justify-content: flex-end;
-    left: 0;
     position: fixed;
     top: 0;
-    width: 100%;
+    left: 0;
+    justify-content: flex-end;
+    align-items: center;
     z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #333;
+    width: 100%;
+    height: 50px;
 }
 
 .navbar__button-group {
@@ -39,13 +61,13 @@ body {
 }
 
 .navbar__button {
-    background-color: #555;
+    cursor: pointer;
     border: none;
     border-radius: 4px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
+    background-color: #555;
     padding: 8px 16px;
+    color: #eee;
+    font-weight: bold;
 }
 
 .navbar__button:not(.navbar__button--active):hover {
@@ -60,31 +82,29 @@ body {
  ********** Status Bar **********
  */
 .status-bar {
-    align-items: center;
-    background-color: #333;
-    bottom: 0;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
     display: flex;
-    font-size: 14pt;
-    font-weight: normal;
-    height: 30px;
-    left: 0;
-    padding: 0 20px;
     position: fixed;
-    width: 100%;
+    bottom: 0;
+    left: 0;
+    align-items: center;
     z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #333;
+    padding: 0 20px;
+    width: 100%;
+    height: 30px;
 }
 
 .status-bar__message {
-    color: #ccc;
-    font-size: 12pt;
     margin-right: 20px;
+    color: #ccc;
 }
 
 /*
  ********** Stats **********
  */
 .stat-view {
+    margin-left: 20px;
     width: 450px;
 }
 
@@ -92,93 +112,181 @@ body {
  ********** Stat Row **********
  */
 .stat-row {
-    box-shadow: 0px 1px rgb(128, 128, 128) inset;
     display: flex;
+    position: relative;
     flex-wrap: wrap;
+    box-shadow: 0px 1px rgb(128, 128, 128) inset;
+    width: 100%;
+    font-weight: bolder;
     font-size: 20pt;
     line-height: 36px;
-    margin-left: 20px;
-    width: 100%;
+    margin-bottom: 5px;
 }
 
-.stat-row__name {
-    max-width: 350px
+.stat-row--attribute> :not(.stat-row__stat-container) .stat-row__buttons,
+.stat-row--attribute> :not(.stat-row__stat-container) .stat-row__advanced-checkbox {
+    display: none;
 }
 
-.stat-row__name--skill {
-    font-size: 18pt;
+.stat-row--skill .stat-row__name-label,
+.stat-row--skill .stat-row__name-input {
     font-weight: normal;
+    font-size: 18pt;
 }
 
-.stat-row__name--spec {
-    font-size: 16pt;
+body[mode="create"] .stat-row--skill .stat-row__name-label {
+    cursor: text;
+}
+
+.stat-row--spec .stat-row__name-label,
+.stat-row--spec .stat-row__name-input {
     font-style: italic;
     font-weight: normal;
+    font-size: 16pt;
 }
 
-.stat-row__value {
-    margin-left: auto;
+body[mode="create"] .stat-row--spec .stat-row__name-label {
+    cursor: text;
+}
+
+.stat-row--spec> :not(.stat-row__stat-container) .stat-row__advanced-checkbox,
+.stat-row--spec> :not(.stat-row__stat-container) .stat-row__add-button {
+    display: none;
 }
 
 .stat-row button {
+    vertical-align: 2px;
+    transition: opacity 0.2s;
+    border: 0px;
     background-color: rgb(255, 140, 0);
-    border: 0px;
+    padding-top: 0.25em;
+    width: 30px;
+    height: 26px;
     color: black;
+    font-weight: bolder;
+    line-height: 100%;
     font-family: inherit;
-    font-weight: 800;
-    height: 25px;
-    width: 30px;
+
+    &:hover {
+        background-color: rgb(255, 165, 0);
+    }
+
+    &:active {
+        background-color: rgb(255, 190, 0);
+    }
 }
 
-.stat-row__add-button {
-    background-color: rgb(0, 170, 0);
-    border: 0px;
-    color: white;
-    font-family: inherit;
-    font-weight: 800;
-    height: 25px;
-    width: 30px;
+.stat-row__buttons {
+    display: flex;
+    position: absolute;
+    top: 5px;
+    left: -40px;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0;
+    transition: height 0.2s, opacity 0.2s;
+    height: 0px;
 }
 
-.stat-row__add-button:hover {
-    background-color: rgb(0, 200, 0);
+body[mode="create"] .stat-row__buttons,
+body[mode="advance"] .stat-row__buttons {
+    opacity: 1;
+    height: 100%;
 }
 
-.stat-row__add-button:active {
-    background-color: rgb(0, 230, 0);
-}
-
-body[mode="view"] .stat-row__add-button {
+button.stat-row__abort-remove-button {
     display: none;
 }
 
-body[mode="view"] .stat-row button {
+button.stat-row__confirm-remove-button {
     display: none;
+    background-color: rgb(220, 50, 50);
+
+    &:hover {
+        background-color: rgb(240, 70, 70);
+    }
+
+    &:active {
+        background-color: rgb(255, 90, 90);
+    }
 }
 
-.stat-row button:hover {
-    background-color: rgb(255, 165, 0);
-}
-
-.stat-row button:active {
-    background-color: rgb(255, 190, 0);
+/*** Label and value ***/
+.stat-row__main-container {
+    display: flex;
+    width: 100%;
 }
 
 .stat-row__name-edit {
-    align-items: center;
+    display: none;
 }
 
 .stat-row__name-input {
-    margin-right: 5px;
-    width: 150px;
+    position: relative;
+    left: -4px;
+    margin-right: -5px;
+    width: 250px;
+    height: 18pt;
+    font-weight: bolder;
+    font-size: 20pt;
+    font-family: "Tw Cen MT";
 }
 
-.stat-row__advanced-toggle {
-    font-size: 11pt;
+.stat-row__value-label {
+    margin-left: auto;
 }
 
-body[mode="view"] .stat-row__advanced-toggle {
-    display: none;
+/*** Widgets and modifier rows ***/
+.stat-row__middle-container {
+    display: flex;
+    width: 100%;
+}
+
+body[mode="create"] .stat-row__middle-container,
+body[mode="advance"] .stat-row__middle-container {
+    margin-bottom: 5px;
+}
+
+.stat-row__widget-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.stat-row__advanced-checkbox {
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: "Segoe UI";
+
+    & input {
+        vertical-align: -2px;
+    }
+
+    & span {
+        vertical-align: 0px;
+    }
+}
+
+/*** Modifier rows ***/
+.stat-row__modifier-container {
+    width: 50%;
+}
+
+/*** Sub stats ***/
+.stat-row__stat-container {
+    margin-left: 25px;
+    width: 100%;
+}
+
+/*** Other ***/
+.stat-row__bottom-container {
+    width: 100%;
+}
+
+button.stat-row__add-button {
+    width: fit-content;
+    font-size: 14px;
+    font-family: "Tw Cen MT";
 }
 
 /*
@@ -186,120 +294,33 @@ body[mode="view"] .stat-row__advanced-toggle {
  */
 .stat-modifier-row {
     display: flex;
-    font-size: 14pt;
-    font-weight: normal;
-    height: 0;
-    line-height: 36px;
-    opacity: 0;
-    overflow: hidden;
     transition: height 0.2s, opacity 0.2s;
     width: 100%;
+    height: 36px;
 }
 
-body[mode="view"] .stat-modifier-row {
-    height: 0;
+body[mode="create"] .stat-modifier-row--advance,
+body[mode="advance"] .stat-modifier-row--create {
     opacity: 0;
-}
-
-body[mode="create"] .stat-modifier-row--create {
-    height: 36px;
-    opacity: 1;
-}
-
-body[mode="advance"] .stat-modifier-row--advance {
-    height: 36px;
-    opacity: 1;
+    height: 0px;
 }
 
 .stat-modifier-row__name {
-    font-family: "Segoe UI";
-    font-size: 10pt;
-    font-weight: normal;
+    margin-right: 10px;
     margin-left: auto;
-    margin-right: 30px;
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: "Segoe UI";
 }
 
 .stat-modifier-row__buttons {
+    margin-right: 0px;
     margin-left: 0px;
-    margin-right: 30px;
-}
-
-.stat-modifier-row__buttons button {
-    background-color: rgb(255, 140, 0);
-    border: 0px;
-    color: black;
-    font-family: inherit;
-    font-weight: 800;
-    height: 25px;
-    width: 30px;
-}
-
-.stat-modifier-row__buttons button:hover {
-    background-color: rgb(255, 165, 0);
-}
-
-.stat-modifier-row__buttons button:active {
-    background-color: rgb(255, 190, 0);
 }
 
 .stat-modifier-row__value {
-    margin-left: 0px;
-    text-align: left;
-    width: 70px;
-}
-
-.stat-row__remove-button {
-    background-color: rgb(220, 50, 50);
-    border: 0px;
-    color: white;
-    font-family: inherit;
-    font-weight: 800;
-    height: 25px;
-    width: 30px;
-}
-
-.stat-row__remove-button:hover {
-    background-color: rgb(240, 70, 70);
-}
-
-.stat-row__remove-button:active {
-    background-color: rgb(255, 90, 90);
-}
-
-.stat-row__remove-button--cancel {
-    background-color: rgb(100, 100, 100);
-}
-
-.stat-row__remove-button--cancel:hover {
-    background-color: rgb(130, 130, 130);
-}
-
-.stat-row__remove-button--cancel:active {
-    background-color: rgb(160, 160, 160);
-}
-
-.stat-row__confirm-remove-button {
-    background-color: rgb(220, 50, 50);
-    border: 0px;
-    color: white;
-    font-family: inherit;
-    font-weight: 800;
-    height: 25px;
-    width: 30px;
-}
-
-.stat-row__confirm-remove-button:hover {
-    background-color: rgb(240, 70, 70);
-}
-
-.stat-row__confirm-remove-button:active {
-    background-color: rgb(255, 90, 90);
-}
-
-body[mode="view"] .stat-row__remove-button {
-    display: none;
-}
-
-body[mode="view"] .stat-row__confirm-remove-button {
-    display: none;
+    width: 6ch;
+    font-weight: normal;
+    font-size: 14pt;
+    text-align: right;
 }
