@@ -27,7 +27,7 @@ export class CharacterStat {
         this.#baseStarting = data.BaseStarting || 0;
 
         this.#species = data.Species || 0;
-        this.#starting = data.Character || 0;
+        this.#starting = data.Starting || 0;
         this.#bonus = data.Bonus || 0;
         this.#improvement = data.Improvement || 0;
     }

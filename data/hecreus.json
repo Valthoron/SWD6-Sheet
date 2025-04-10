@@ -6,7 +6,7 @@
             "Name": "Strength",
             "Base": "",
             "Species": 6,
-            "Character": 0,
+            "Starting": 0,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -15,7 +15,7 @@
             "Name": "Dexterity",
             "Base": "",
             "Species": 6,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -24,7 +24,7 @@
             "Name": "Perception",
             "Base": "",
             "Species": 6,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -33,7 +33,7 @@
             "Name": "Knowledge",
             "Base": "",
             "Species": 6,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -42,7 +42,7 @@
             "Name": "Mechanical",
             "Base": "",
             "Species": 6,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -51,7 +51,7 @@
             "Name": "Technical",
             "Base": "",
             "Species": 6,
-            "Character": 6,
+            "Starting": 6,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -60,7 +60,7 @@
             "Name": "Stamina",
             "Base": "Strength",
             "Species": 0,
-            "Character": 1,
+            "Starting": 1,
             "Bonus": 0,
             "Improvement": 0,
             "BaseStarting": 0
@@ -71,7 +71,7 @@
             "Base": "Dexterity",
             "BaseStarting": 0,
             "Species": 0,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -81,7 +81,7 @@
             "Base": "Perception",
             "BaseStarting": 0,
             "Species": 0,
-            "Character": 2,
+            "Starting": 2,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -91,7 +91,7 @@
             "Base": "Knowledge",
             "BaseStarting": 0,
             "Species": 0,
-            "Character": 6,
+            "Starting": 6,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -101,7 +101,7 @@
             "Base": "Knowledge",
             "BaseStarting": 0,
             "Species": 0,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -111,7 +111,7 @@
             "Base": "Mechanical",
             "BaseStarting": 0,
             "Species": 3,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -121,7 +121,7 @@
             "Base": "Mechanical",
             "BaseStarting": 0,
             "Species": 3,
-            "Character": 0,
+            "Starting": 0,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -131,7 +131,7 @@
             "Base": "Technical",
             "BaseStarting": 0,
             "Species": 0,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -141,7 +141,7 @@
             "Base": "Technical",
             "BaseStarting": 0,
             "Species": 0,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         },
@@ -151,7 +151,7 @@
             "Base": "Musical Instrument Repair",
             "BaseStarting": 15,
             "Species": 0,
-            "Character": 3,
+            "Starting": 3,
             "Bonus": 0,
             "Improvement": 0
         }
