@@ -87,7 +87,6 @@ export class StatRow extends View {
 
     _setupEventListeners_Rename() {
         this._nameLabel.addEventListener("click", () => this._beginRename());
-        this._nameInput.addEventListener("blur", () => this._revertName());
         this._renameButton.addEventListener("click", () => this._beginRename());
         this._nameSaveButton.addEventListener("click", () => this._saveName());
         this._nameRevertButton.addEventListener("click", () => this._revertName());
