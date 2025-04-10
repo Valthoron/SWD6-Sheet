@@ -1,34 +1,33 @@
 export class ModeHandler {
-    #storageKey = 'swd6-sheet-mode';
+    #storageKey = "swd6-sheet-mode";
+    #currentMode = "";
 
     constructor() {
-        this.currentMode = '';
-
         this.buttons = {
-            'view': document.getElementById('nav-mode-view'),
-            'create': document.getElementById('nav-mode-create'),
-            'advance': document.getElementById('nav-mode-advance')
+            "view": document.getElementById("nav-mode-view"),
+            "create": document.getElementById("nav-mode-create"),
+            "advance": document.getElementById("nav-mode-advance")
         };
 
-        this.buttons['view'].addEventListener('click', () => this.switchMode('view'));
-        this.buttons['create'].addEventListener('click', () => this.switchMode('create'));
-        this.buttons['advance'].addEventListener('click', () => this.switchMode('advance'));
+        this.buttons["view"].addEventListener("click", () => this.switchMode("view"));
+        this.buttons["create"].addEventListener("click", () => this.switchMode("create"));
+        this.buttons["advance"].addEventListener("click", () => this.switchMode("advance"));
     }
 
     initialize() {
-        const savedMode = localStorage.getItem(this.#storageKey) || 'view';
+        const savedMode = localStorage.getItem(this.#storageKey) || "view";
         this.switchMode(savedMode);
         return this;
     }
 
     switchMode(mode) {
-        if (this.currentMode === mode) return;
+        if (this.#currentMode === mode) return;
 
-        this.buttons[this.currentMode]?.classList.remove('navbar__button--active');
-        this.buttons[mode].classList.add('navbar__button--active');
+        this.buttons[this.#currentMode]?.classList.remove("navbar__button--active");
+        this.buttons[mode].classList.add("navbar__button--active");
 
-        this.currentMode = mode;
-        document.body.setAttribute('mode', mode);
+        this.#currentMode = mode;
+        document.body.setAttribute("mode", mode);
 
         localStorage.setItem(this.#storageKey, mode);
     }

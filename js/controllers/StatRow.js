@@ -70,8 +70,6 @@ export class StatRow extends View {
         this._stat = stat;
         this._nameLabel.textContent = stat.Name;
 
-        //this._confirmRemoveButton.style.display = "none";
-
         return this;
     }
 
@@ -81,11 +79,11 @@ export class StatRow extends View {
         this._createModifierRow("Bonus", "create");
     }
 
-    _setupEventListeners_Add() {
+    _setupEventListenersAdd() {
         this._addButton.addEventListener("click", () => this._addStat());
     }
 
-    _setupEventListeners_Rename() {
+    _setupEventListenersRename() {
         this._nameLabel.addEventListener("click", () => this._beginRename());
         this._renameButton.addEventListener("click", () => this._beginRename());
         this._nameSaveButton.addEventListener("click", () => this._saveName());
@@ -102,13 +100,13 @@ export class StatRow extends View {
         });
     }
 
-    _setupEventListeners_Remove() {
+    _setupEventListenersRemove() {
         this._removeButton.addEventListener("click", () => this._beginRemove());
         this._abortRemoveButton.addEventListener("click", () => this._abortRemove());
         this._confirmRemoveButton.addEventListener("click", () => this._confirmRemove());
     }
 
-    _setupEventListeners_AdvancedSkill() {
+    _setupEventListenersAdvancedSkill() {
         this._advancedCheckbox.addEventListener("change", () => this._toggleAdvancedSkill());
     }
 
@@ -130,7 +128,7 @@ export class StatRow extends View {
 
     _createModifierRow(modifierName, displayMode) {
         const row = new StatModifierRow().initialize({ name: modifierName, displayMode: displayMode });
-        row.onChange = (modifier, delta) => this._modifierChange(modifier, delta);
+        row.onValueChange = (modifier, delta) => this._modifierChange(modifier, delta);
         this.appendChild(row, "modifier-container");
         this._modifierRows[modifierName] = row;
     }
@@ -225,7 +223,7 @@ export class AttributeRow extends StatRow {
 
     _setupEventListeners() {
         super._setupEventListeners();
-        this._setupEventListeners_Add();
+        this._setupEventListenersAdd();
     }
 }
 
@@ -250,10 +248,10 @@ export class SkillRow extends StatRow {
 
     _setupEventListeners() {
         super._setupEventListeners();
-        this._setupEventListeners_Add();
-        this._setupEventListeners_AdvancedSkill();
-        this._setupEventListeners_Rename();
-        this._setupEventListeners_Remove();
+        this._setupEventListenersAdd();
+        this._setupEventListenersAdvancedSkill();
+        this._setupEventListenersRename();
+        this._setupEventListenersRemove();
     }
 
     refresh() {
@@ -274,7 +272,7 @@ export class SpecRow extends StatRow {
 
     _setupEventListeners() {
         super._setupEventListeners();
-        this._setupEventListeners_Rename();
-        this._setupEventListeners_Remove();
+        this._setupEventListenersRename();
+        this._setupEventListenersRemove();
     }
 }

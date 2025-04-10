@@ -38,7 +38,8 @@ export class Character {
     updateStatName(name, newName) {
         const stat = this.getStat(name);
 
-        if (!stat) return;
+        if (!stat)
+            return;
 
         stat.Name = newName;
         this.#stats.forEach(stat => { if (stat.Base === name) stat.Base = newName; });
@@ -47,8 +48,11 @@ export class Character {
     updateStatModifier(name, modifier, delta) {
         const stat = this.getStat(name);
 
-        if (!stat) return;
-        if (!(modifier in stat)) return;
+        if (!stat)
+            return;
+
+        if (!(modifier in stat))
+            return;
 
         stat[modifier] += delta;
 
@@ -61,7 +65,8 @@ export class Character {
     updateStatType(name, newType) {
         const stat = this.getStat(name);
 
-        if (!stat) return;
+        if (!stat)
+            return;
 
         stat.Type = newType;
         this.calculate();
@@ -87,9 +92,7 @@ export class Character {
 
         // Statistics / totals
         const attributes = this.getStatsWithType("Attribute");
-        const skills = this.#stats.filter(stat =>
-            ["Skill", "AdvancedSkill", "Specialization"].includes(stat.Type)
-        );
+        const skills = this.#stats.filter(stat => ["Skill", "AdvancedSkill", "Specialization"].includes(stat.Type));
 
         this.#totals.AttributesSpecies = attributes.reduce((total, stat) => total + stat.Species, 0);
         this.#totals.AttributesStarting = attributes.reduce((total, stat) => total + stat.Starting, 0);

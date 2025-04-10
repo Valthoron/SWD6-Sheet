@@ -8,7 +8,7 @@ export class StatModifierRow extends View {
     _decreaseButton = null;
     _increaseButton = null;
 
-    onChange = null;
+    onValueChange = null;
 
     constructor() {
         const [element, childMap] = Templates.getInstance().getWithChildMap("statModifierRow");
@@ -40,6 +40,6 @@ export class StatModifierRow extends View {
     }
 
     _change(delta) {
-        this.onChange?.(this._nameLabel.textContent, delta);
-    };
+        this.onValueChange?.(this._nameLabel.textContent, delta);
+    }
 }
