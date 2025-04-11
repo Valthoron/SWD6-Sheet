@@ -11,7 +11,7 @@ export class StatModifierRow extends View {
     onValueChange = null;
 
     constructor() {
-        const [element, childMap] = Templates.getInstance().getWithChildMap("statModifierRow");
+        const [element, childMap] = Templates.instantiateWithChildMap("statModifierRow");
         super(element);
 
         this._nameLabel = childMap.get("stat-modifier-row-name-label");

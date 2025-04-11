@@ -1,34 +1,32 @@
 export class Templates {
     static #instance = null;
+
     #templates = new Map();
 
-    static getInstance() {
+    static #getInstance() {
         if (!Templates.#instance) {
             Templates.#instance = new Templates();
-            Templates.#instance.#initialize();
         }
 
         return Templates.#instance;
     }
 
-    #initialize() {
-        this.#addTemplate("statRow", "template-stat-row");
-        this.#addTemplate("statModifierRow", "template-stat-modifier-row");
-    }
-
-    #addTemplate(templateName, elementId) {
-        const template = document.getElementById(elementId);
+    static register(name, template) {
         template.removeAttribute("id");
         template.remove();
-        this.#templates.set(templateName, template);
+
+        Templates.#getInstance().#templates.set(name, template);
     }
 
-    get(templateName) {
-        const template = this.#templates.get(templateName);
+    static getNames() {
+        return Array.from(getInstance().#templates.keys());
+    }
 
-        if (!template) {
+    static instantiate(templateName) {
+        const template = Templates.#getInstance().#templates.get(templateName);
+
+        if (!template)
             throw new Error(`Template "${templateName}" not found`);
-        }
 
         const element = template.cloneNode(true);
 
@@ -39,12 +37,11 @@ export class Templates {
         return element;
     }
 
-    getWithChildMap(templateName) {
-        const template = this.#templates.get(templateName);
+    static instantiateWithChildMap(templateName) {
+        const template = Templates.#getInstance().#templates.get(templateName);
 
-        if (!template) {
+        if (!template)
             throw new Error(`Template "${templateName}" not found`);
-        }
 
         const element = template.cloneNode(true);
 

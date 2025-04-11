@@ -36,7 +36,7 @@ export class StatRow extends View {
     onRemoveStat = null;
 
     constructor() {
-        const [element, childMap] = Templates.getInstance().getWithChildMap("statRow");
+        const [element, childMap] = Templates.instantiateWithChildMap("statRow");
         super(element);
 
         this._nameLabel = this._element.querySelector(".stat-row__name-label");
