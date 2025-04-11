@@ -6,6 +6,8 @@ export class SheetController extends View {
     _character = null;
     _rows = {};
 
+    _nameLabel = null;
+
     _totalAttributesSpeciesElement = null;
     _totalAttributesStartingElement = null;
     _totalSkillsElement = null;
@@ -13,9 +15,11 @@ export class SheetController extends View {
     _totalDiceElement = null;
     _totalCharacterPointsElement = null;
 
-    constructor(character, sheetElement, navBar, statusBar) {
+    constructor(character, nameLabel, sheetElement, statusBar) {
         super(sheetElement);
         this._character = character;
+
+        this._nameLabel = nameLabel;
 
         // Statistics / totals
         this._totalAttributesSpeciesElement = statusBar.querySelector('#stat-total-attributes-species');
@@ -28,7 +32,10 @@ export class SheetController extends View {
 
     initialize() {
         super.initialize();
+
+        this._nameLabel.textContent = this._character.Name;
         this.refresh();
+
         return this;
     }
 

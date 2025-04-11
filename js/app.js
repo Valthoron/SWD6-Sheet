@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     new ModeHandler().initialize();
 
+    const nameLabel = document.getElementById("nav-name-label");
+
     const statView = document.getElementById("stat-view");
     const navBar = document.getElementById("nav-bar");
     const statusBar = document.getElementById("status-bar");
@@ -18,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const character = await Character.fromData("hecreus.json");
         saveButton.addEventListener("click", () => character.downloadAsJson());
-        new SheetController(character, statView, navBar, statusBar).initialize();
+        new SheetController(character, nameLabel, statView, statusBar).initialize();
     } catch (error) {
         console.error("Failed to load character sheet:", error);
     }
