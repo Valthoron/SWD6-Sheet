@@ -62,22 +62,49 @@ body[mode="advance"] .mode-advance {
 
 .navbar__character-name-edit {
     display: none;
+    align-items: center;
     margin-left: 20px;
-    width: 250px;
-    line-height: 26pt;
 }
 
-.navbar__character-name-edit input {
+.navbar__character-name-edit button {
+    vertical-align: 2px;
+    transition: opacity 0.2s;
+    border: 0px;
+    background-color: rgb(255, 140, 0);
+    padding-top: 0.25em;
+    width: 30px;
+    height: 26px;
+    color: black;
+    font-weight: bolder;
+    line-height: 100%;
+    font-family: inherit;
+
+    &:hover {
+        background-color: rgb(255, 165, 0);
+    }
+
+    &:active {
+        background-color: rgb(255, 190, 0);
+    }
+}
+
+.navbar__character-name-input {
+    width: 200px;
     font-weight: bolder;
     font-size: 26pt;
     font-family: "Tw Cen MT";
 }
 
+.navbar__button-container {
+    display: flex;
+    gap: 40px;
+    margin-right: 20px;
+    margin-left: auto;
+}
+
 .navbar__button-group {
     display: flex;
     gap: 10px;
-    margin-right: 20px;
-    margin-left: auto;
 }
 
 .navbar__button {
