@@ -1,0 +1,56 @@
+{
+    "name": "swd6-sheet",
+    "version": "0.1.0",
+    "description": "Star Wars D6 Character Sheet",
+    "main": "js/electronMain.js",
+    "type": "module",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Valthoron/SWD6-Sheet-Web.git"
+    },
+    "keywords": [
+        "star-wars",
+        "rpg",
+        "character-sheet"
+    ],
+    "author": "Serdar Üşenmez",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/Valthoron/SWD6-Sheet-Web/issues"
+    },
+    "homepage": "https://github.com/Valthoron/SWD6-Sheet-Web#readme",
+    "devDependencies": {
+        "electron": "^35.1.5",
+        "electron-builder": "^26.0.12"
+    },
+    "build": {
+        "appId": "com.serdarusenmez.swd6sheet",
+        "productName": "Star Wars D6 Character Sheet",
+        "directories": {
+            "output": "dist"
+        },
+        "files": [
+            "**/*",
+            "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+            "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+            "!**/node_modules/*.d.ts",
+            "!**/node_modules/.bin",
+            "!**/.{idea,git,cache,github,vscode}",
+            "!**/{.DS_Store,thumbs.db}"
+        ],
+        "mac": {
+            "category": "public.app-category.utilities"
+        },
+        "win": {
+            "target": "nsis"
+        },
+        "linux": {
+            "target": "AppImage"
+        }
+    }
+}

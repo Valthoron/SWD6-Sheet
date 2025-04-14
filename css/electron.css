@@ -1,0 +1,32 @@
+/* Desktop app specific styles */
+/* Prevent scrollbars in desktop app */
+/* Account for navbar and statusbar */
+/*
+body {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.stat-view {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+*/
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}

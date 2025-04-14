@@ -1,4 +1,4 @@
-import { CharacterStat } from './CharacterStat.js';
+import { CharacterStat } from "./CharacterStat.js";
 
 export class Character {
     #name = "";
@@ -111,28 +111,30 @@ export class Character {
         };
     }
 
-    downloadAsJson() {
-        const characterData = JSON.stringify(this.toJSON(), null, 4);
-        const blob = new Blob([characterData], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const fileName = `${this.#name || 'character'}.json`;
-        const downloadLink = document.createElement('a');
-        downloadLink.href = url;
-        downloadLink.download = fileName;
-        downloadLink.click();
-        setTimeout(() => URL.revokeObjectURL(url), 100);
+    getData() {
+        return JSON.stringify(this.toJSON(), null, 4);
     }
 
-    static async fromData(path) {
-        try {
-            const response = await fetch('data/' + path);
-            const characterData = await response.json();
-            const character = new Character(characterData);
-            character.calculate();
-            return character;
-        } catch (error) {
-            console.error('Error loading character data:', error);
-            throw error;
-        }
+    static fromData(characterData) {
+        const character = new Character(characterData);
+        character.calculate();
+        return character;
+    }
+
+    static createDefault() {
+        const defaultData = {
+            Name: "(Unnamed Character)",
+            Stats: [
+                // Attributes
+                { Name: "Dexterity", Type: "Attribute", Starting: 6 },
+                { Name: "Knowledge", Type: "Attribute", Starting: 6 },
+                { Name: "Mechanical", Type: "Attribute", Starting: 6 },
+                { Name: "Perception", Type: "Attribute", Starting: 6 },
+                { Name: "Strength", Type: "Attribute", Starting: 6 },
+                { Name: "Technical", Type: "Attribute", Starting: 6 }
+            ]
+        };
+
+        return Character.fromData(defaultData);
     }
 }
