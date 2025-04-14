@@ -1,4 +1,4 @@
-import { pipsToDice } from '../utils/Formatters.js';
+import { pipsToDice } from '../utils/formatters.js';
 import { AttributeRow, SkillRow, SpecRow } from './StatRow.js';
 import { View } from './View.js';
 

@@ -87,6 +87,7 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-fonts/
-
+# Project files
 .github/
+dist/
+fonts/

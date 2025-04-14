@@ -1,4 +1,4 @@
-import { jsonAddNonZero } from "../utils/Json.js";
+import { jsonAddNonZero } from "../utils/json.js";
 
 export class CharacterStat {
     #character = null;
