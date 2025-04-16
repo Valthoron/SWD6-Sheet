@@ -70,7 +70,7 @@ export class View {
         if (!(child instanceof View))
             throw new Error("Child must be an instance of View.");
 
-        if (!child in this._children)
+        if (!(child in this._children))
             throw new Error("Child is not a child of this view.");
 
         const parent = this._children[child];
