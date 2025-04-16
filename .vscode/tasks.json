@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Kill Terminal",
+            "command": "${command:workbench.action.terminal.kill}",
+            "type": "shell",
+            "problemMatcher": []
+        }
+    ]
+}

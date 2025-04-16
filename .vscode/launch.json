@@ -1,0 +1,63 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Start",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "windows": {
+                "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+            },
+            "args": [
+                "."
+            ],
+            "outputCapture": "std",
+            "console": "integratedTerminal",
+            "postDebugTask": "Kill Terminal"
+        },
+        {
+            "name": "Debug Main Process",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "windows": {
+                "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+            },
+            "args": [
+                ".",
+                "--remote-debugging-port=9223"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "outputCapture": "std",
+            "console": "integratedTerminal",
+            "presentation": {
+                "hidden": true,
+            },
+            "postDebugTask": "Kill Terminal"
+        },
+        {
+            "name": "Debug Renderer Process",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9223,
+            "webRoot": "${workspaceFolder}",
+            "timeout": 30000,
+            "presentation": {
+                "hidden": true,
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug",
+            "configurations": [
+                "Debug Main Process",
+                "Debug Renderer Process"
+            ]
+        }
+    ]
+}
