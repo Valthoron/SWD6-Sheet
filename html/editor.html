@@ -72,7 +72,7 @@
             </div>
 
             <div class="collapse mode-edit">
-                <div></div>
+                <div><!-- .collapse requires this empty div --></div>
                 <div class="stat-row__middle-container">
                     <div class="stat-row__widget-container">
                         <label class="stat-row__advanced-checkbox">
@@ -89,21 +89,17 @@
             <div class="stat-row__stat-container"></div>
 
             <div class="collapse mode-edit">
-                <div></div>
-                <div class="stat-row__bottom-container">
-
-                </div>
+                <div><!-- .collapse requires this empty div --></div>
+                <div class="stat-row__bottom-container"></div>
             </div>
         </div>
 
         <!-- Stat modifier row -->
         <div class="stat-modifier-row" id="template-stat-modifier-row">
             <div id="stat-modifier-row-name-label" class="stat-modifier-row__name">name</div>
-            <div class="stat-modifier-row__buttons">
-                <button id="stat-modifier-row-decrement-button">&ndash;</button>
-                <button id="stat-modifier-row-increment-button">+</button>
-            </div>
+            <button id="stat-modifier-row-decrement-button">&ndash;</button>
             <div id="stat-modifier-row-value-label" class="stat-modifier-row__value">0</div>
+            <button id="stat-modifier-row-increment-button">+</button>
         </div>
     </div>
 

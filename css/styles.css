@@ -223,8 +223,6 @@ body[mode="edit"] .stat-row--spec .stat-row__name-label {
 }
 
 .stat-row button {
-    vertical-align: 2px;
-    transition: opacity 0.2s;
     border: 0px;
     background-color: rgb(255, 140, 0);
     padding-top: 0.25em;
@@ -385,14 +383,14 @@ button.stat-row__add-button {
     font-family: "Segoe UI";
 }
 
-.stat-modifier-row__buttons {
-    margin-right: 0px;
-    margin-left: 0px;
-}
-
 .stat-modifier-row__value {
     width: 6ch;
     font-weight: normal;
     font-size: 14pt;
     text-align: right;
+    text-align: center;
+}
+
+.stat-modifier-row button {
+    align-self: center;
 }
