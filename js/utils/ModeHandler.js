@@ -1,19 +1,25 @@
 export class ModeHandler {
     #storageKey = "swd6-sheet-mode";
     #currentMode = "";
+    #buttons = null;
 
     constructor() {
-        this.buttons = {
+        this.#buttons = {
             "view": document.getElementById("nav-mode-view"),
             "edit": document.getElementById("nav-mode-edit"),
         };
 
-        this.buttons["view"].addEventListener("click", () => this.switchMode("view"));
-        this.buttons["edit"].addEventListener("click", () => this.switchMode("edit"));
+        Object.entries(this.#buttons).forEach(([name, button]) => {
+            button.addEventListener("click", () => this.switchMode(name));
+        });
     }
 
     initialize() {
-        const savedMode = localStorage.getItem(this.#storageKey) || "view";
+        let savedMode = localStorage.getItem(this.#storageKey);
+
+        if (!Object.keys(this.#buttons).includes(savedMode))
+            savedMode = Object.keys(this.#buttons)[0];
+
         this.switchMode(savedMode);
         return this;
     }
@@ -21,8 +27,8 @@ export class ModeHandler {
     switchMode(mode) {
         if (this.#currentMode === mode) return;
 
-        this.buttons[this.#currentMode]?.classList.remove("navbar__button--active");
-        this.buttons[mode].classList.add("navbar__button--active");
+        this.#buttons[this.#currentMode]?.classList.remove("navbar__button--active");
+        this.#buttons[mode]?.classList.add("navbar__button--active");
 
         this.#currentMode = mode;
         document.body.setAttribute("mode", mode);
