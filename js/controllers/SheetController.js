@@ -97,11 +97,26 @@ export class SheetController extends View {
         this.refresh();
     }
 
+    _createUniqueStatName(startingName) {
+        let name = startingName;
+        let i = 2;
+
+        while (this._character.getStat(name)) {
+            name = `${startingName} (${i})`;
+            i++;
+
+            if (i > 10)
+                break;
+        }
+
+        return name;
+    }
+
     _rowAddStat(parentStat) {
         if (parentStat.Type === "Attribute") {
             const stat = this._character.addStat({
                 Type: "Skill",
-                Name: "New Skill",
+                Name: this._createUniqueStatName("New Skill"),
                 Base: parentStat.Name
             });
 
@@ -111,7 +126,7 @@ export class SheetController extends View {
         } else if ((parentStat.Type === "Skill") || (parentStat.Type === "AdvancedSkill")) {
             const stat = this._character.addStat({
                 Type: "Specialization",
-                Name: "New Specialization",
+                Name: this._createUniqueStatName("New Specialization"),
                 Base: parentStat.Name
             });
 

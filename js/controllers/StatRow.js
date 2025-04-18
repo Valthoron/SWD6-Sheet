@@ -89,6 +89,7 @@ export class StatRow extends View {
         this._nameSaveButton.addEventListener("click", () => this._saveName());
         this._nameRevertButton.addEventListener("click", () => this._revertName());
 
+        this._nameInput.addEventListener("input", () => this._validateNameInput());
         this._nameInput.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
                 event.preventDefault();
@@ -137,6 +138,34 @@ export class StatRow extends View {
         this.onModifierChange?.(modifier, delta);
     }
 
+    _isNameValid(name) {
+        // Empty names are invalid
+        if (!name === "")
+            return false;
+
+        // If the name is unchanged, it's valid
+        if (name.toLowerCase() === this._stat.Name.toLowerCase())
+            return true;
+
+        // Check for duplicates in all stats
+        const stats = this._stat.Character.Stats;
+        return !stats.some(stat => stat.Name.toLowerCase() === name.toLowerCase());
+    }
+
+    _validateNameInput() {
+        const isValid = this._isNameValid(this._nameInput.value.trim());
+
+        if (isValid) {
+            this._nameInput.classList.remove("stat-row__name-input--invalid");
+            this._nameSaveButton.disabled = false;
+        } else {
+            this._nameInput.classList.add("stat-row__name-input--invalid");
+            this._nameSaveButton.disabled = true;
+        }
+
+        return isValid;
+    }
+
     _beginRename() {
         if (document.body.getAttribute("mode") === "view")
             return;
@@ -148,6 +177,9 @@ export class StatRow extends View {
         this._buttonContainer.style.display = "none";
         this._nameEditContainer.style.display = "block";
 
+        this._nameInput.classList.remove("stat-row__name-input--invalid");
+        this._nameSaveButton.disabled = false;
+
         this._nameInput.focus();
     }
 
@@ -158,10 +190,16 @@ export class StatRow extends View {
         this._nameLabel.style.display = "block";
         this._buttonContainer.style.display = "flex";
         this._nameEditContainer.style.display = "none";
+
+        this._nameInput.classList.remove("stat-row__name-input--invalid");
+        this._nameSaveButton.disabled = false;
     }
 
     _saveName() {
         const newName = this._nameInput.value.trim();
+
+        if (!this._isNameValid(newName))
+            return;
 
         if (newName && (newName !== this._stat.Name)) {
             this.onNameChange?.(newName);

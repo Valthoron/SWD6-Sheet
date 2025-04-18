@@ -32,6 +32,8 @@ export class CharacterStat {
         this.#improvement = data.Improvement || 0;
     }
 
+    get Character() { return this.#character; }
+
     get Name() { return this.#name; }
     set Name(value) { this.#name = value; }
 

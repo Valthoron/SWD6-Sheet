@@ -223,6 +223,11 @@ body[mode="create"] .stat-row--spec .stat-row__name-label {
     }
 }
 
+.stat-row button:disabled {
+    background-color: rgb(100, 100, 100);
+    color: #aaa;
+}
+
 .stat-row__buttons {
     display: flex;
     position: absolute;
@@ -277,6 +282,13 @@ button.stat-row__confirm-remove-button {
     font-weight: bolder;
     font-size: 20pt;
     font-family: "Tw Cen MT";
+}
+
+.stat-row__name-input--invalid {
+    background-color: #ffdddd;
+    /*border: 1px solid #ff0000;*/
+    box-shadow: 1px 1px 5px #ff0000 inset;
+    color: #cc0000;
 }
 
 .stat-row__value-label {
