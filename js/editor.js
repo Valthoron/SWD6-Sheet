@@ -71,7 +71,6 @@ function loadSheet(character) {
     G_statView.innerHTML = "";
     G_character = character;
     G_sheetController = new SheetController(G_character, G_navBar, G_statView, G_statusBar).initialize();
-    G_modeHandler.switchMode("view");
 }
 
 // ********************************************************************************
