@@ -28,8 +28,7 @@ body {
 }
 
 body[mode="view"] .mode-view,
-body[mode="create"] .mode-create,
-body[mode="advance"] .mode-advance {
+body[mode="edit"] .mode-edit {
     grid-template-rows: min-content 1fr;
 }
 
@@ -61,8 +60,7 @@ body[mode="advance"] .mode-advance {
     font-size: 26pt;
 }
 
-body[mode="create"] .navbar__character-name-label,
-body[mode="advance"] .navbar__character-name-label {
+body[mode="edit"] .navbar__character-name-label {
     cursor: text;
 }
 
@@ -70,16 +68,15 @@ body[mode="advance"] .navbar__character-name-label {
     display: none;
     flex-grow: 2;
     align-items: center;
-    margin-left: 20px;
     margin-right: 20px;
+    margin-left: 20px;
 }
 
 #nav-rename-button {
     display: none;
 }
 
-body[mode="create"] #nav-rename-button,
-body[mode="advance"] #nav-rename-button {
+body[mode="edit"] #nav-rename-button {
     display: block;
 }
 
@@ -107,6 +104,8 @@ body[mode="advance"] #nav-rename-button {
 }
 
 .navbar__character-name-input {
+    position: relative;
+    left: -4px;
     flex-grow: 2;
     margin-right: 10px;
     font-weight: bolder;
@@ -203,8 +202,7 @@ body[mode="advance"] #nav-rename-button {
     font-size: 18pt;
 }
 
-body[mode="create"] .stat-row--skill .stat-row__name-label,
-body[mode="advance"] .stat-row--skill .stat-row__name-label {
+body[mode="edit"] .stat-row--skill .stat-row__name-label {
     cursor: text;
 }
 
@@ -215,8 +213,7 @@ body[mode="advance"] .stat-row--skill .stat-row__name-label {
     font-size: 16pt;
 }
 
-body[mode="create"] .stat-row--spec .stat-row__name-label,
-body[mode="advance"] .stat-row--spec .stat-row__name-label {
+body[mode="edit"] .stat-row--spec .stat-row__name-label {
     cursor: text;
 }
 
@@ -264,8 +261,7 @@ body[mode="advance"] .stat-row--spec .stat-row__name-label {
     height: 0px;
 }
 
-body[mode="create"] .stat-row__buttons,
-body[mode="advance"] .stat-row__buttons {
+body[mode="edit"] .stat-row__buttons {
     opacity: 1;
     height: 100%;
 }
@@ -325,15 +321,14 @@ button.stat-row__confirm-remove-button {
     width: 100%;
 }
 
-body[mode="create"] .stat-row__middle-container,
-body[mode="advance"] .stat-row__middle-container {
+body[mode="edit"] .stat-row__middle-container {
     margin-bottom: 5px;
 }
 
 .stat-row__widget-container {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 45%;
 }
 
 .stat-row__advanced-checkbox {
@@ -352,7 +347,7 @@ body[mode="advance"] .stat-row__middle-container {
 
 /*** Modifier rows ***/
 .stat-row__modifier-container {
-    width: 50%;
+    width: 55%;
 }
 
 /*** Sub stats ***/
@@ -380,12 +375,6 @@ button.stat-row__add-button {
     transition: height 0.2s, opacity 0.2s;
     width: 100%;
     height: 36px;
-}
-
-body[mode="create"] .stat-modifier-row--advance,
-body[mode="advance"] .stat-modifier-row--create {
-    opacity: 0;
-    height: 0px;
 }
 
 .stat-modifier-row__name {

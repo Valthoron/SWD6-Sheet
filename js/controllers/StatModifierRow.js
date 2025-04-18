@@ -21,11 +21,10 @@ export class StatModifierRow extends View {
         this._increaseButton = childMap.get("stat-modifier-row-increment-button");
     }
 
-    initialize({ name, displayMode }) {
+    initialize(name) {
         super.initialize();
 
         this._nameLabel.textContent = name;
-        this._element.classList.add(`stat-modifier-row--${displayMode}`);
 
         return this;
     }

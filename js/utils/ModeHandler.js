@@ -5,13 +5,11 @@ export class ModeHandler {
     constructor() {
         this.buttons = {
             "view": document.getElementById("nav-mode-view"),
-            "create": document.getElementById("nav-mode-create"),
-            "advance": document.getElementById("nav-mode-advance")
+            "edit": document.getElementById("nav-mode-edit"),
         };
 
         this.buttons["view"].addEventListener("click", () => this.switchMode("view"));
-        this.buttons["create"].addEventListener("click", () => this.switchMode("create"));
-        this.buttons["advance"].addEventListener("click", () => this.switchMode("advance"));
+        this.buttons["edit"].addEventListener("click", () => this.switchMode("edit"));
     }
 
     initialize() {

@@ -74,9 +74,9 @@ export class StatRow extends View {
     }
 
     _initializeChildViews() {
-        this._createModifierRow("Starting", "create");
-        this._createModifierRow("Improvement", "advance");
-        this._createModifierRow("Bonus", "create");
+        this._createModifierRow("Starting");
+        this._createModifierRow("Improvement");
+        this._createModifierRow("Bonus");
     }
 
     _setupEventListenersAdd() {
@@ -127,8 +127,8 @@ export class StatRow extends View {
         this._nameInput.select();
     }
 
-    _createModifierRow(modifierName, displayMode) {
-        const row = new StatModifierRow().initialize({ name: modifierName, displayMode: displayMode });
+    _createModifierRow(modifierName) {
+        const row = new StatModifierRow().initialize(modifierName);
         row.onValueChange = (modifier, delta) => this._modifierChange(modifier, delta);
         this.appendChild(row, "modifier-container");
         this._modifierRows[modifierName] = row;
@@ -254,7 +254,7 @@ export class AttributeRow extends StatRow {
     }
 
     _initializeChildViews() {
-        this._createModifierRow("Species", "create");
+        this._createModifierRow("Species");
 
         super._initializeChildViews();
     }
