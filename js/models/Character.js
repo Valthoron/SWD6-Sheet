@@ -80,15 +80,15 @@ export class Character {
     }
 
     removeStat(name) {
-        let statsToRemove = [name];
-        this.getStatsWithBase(name).forEach(stat => statsToRemove.push(stat.Name));
-        this.#stats = this.#stats.filter(stat => !statsToRemove.includes(stat.Name));
+        let statsToRemove = [this.getStat(name)];
+        this.getStatsWithBase(name).forEach(stat => statsToRemove.push(stat));
+        this.#stats = this.#stats.filter(stat => !statsToRemove.includes(stat));
         this.calculate();
         return statsToRemove;
     }
 
     calculate() {
-        this.#stats.forEach(stat => { stat.calculate(this); });
+        this.#stats.forEach(stat => { stat.calculate(); });
 
         // Statistics / totals
         const attributes = this.getStatsWithType("Attribute");

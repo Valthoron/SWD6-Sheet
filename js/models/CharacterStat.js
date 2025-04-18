@@ -60,8 +60,8 @@ export class CharacterStat {
     get TotalWithBonus() { return this.#total + this.#bonus; }
     get CharacterPoints() { return this.#characterPoints; }
 
-    calculate(character) {
-        this.calculateTotal(character);
+    calculate() {
+        this.calculateTotal();
         this.calculateCharacterPoints();
     }
 

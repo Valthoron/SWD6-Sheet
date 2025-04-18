@@ -4,8 +4,8 @@ import { View } from './View.js';
 
 export class SheetController extends View {
     _character = null;
-    _rows = {};
 
+    _rows = null;
     _nameLabel = null;
 
     _totalAttributesSpeciesElement = null;
@@ -17,8 +17,10 @@ export class SheetController extends View {
 
     constructor(character, nameLabel, sheetElement, statusBar) {
         super(sheetElement);
+
         this._character = character;
 
+        this._rows = new Map();
         this._nameLabel = nameLabel;
 
         // Statistics / totals
@@ -69,12 +71,14 @@ export class SheetController extends View {
         row.onAddStat = () => this._rowAddStat(stat);
         row.onRemoveStat = () => this._rowRemoveStat(stat);
 
-        if (stat.Base !== "")
-            this._rows[stat.Base].appendChild(row, "stat-container");
+        if (stat.Base !== "") {
+            let base = this._rows.get(this._character.getStat(stat.Base));
+            base.appendChild(row, "stat-container");
+        }
         else
             this.appendChild(row);
 
-        this._rows[stat.Name] = row;
+        this._rows.set(stat, row);
 
         return row;
     }
@@ -121,16 +125,16 @@ export class SheetController extends View {
     _rowRemoveStat(stat) {
         const statsToRemove = this._character.removeStat(stat.Name);
 
-        statsToRemove.forEach(statName => {
-            this._rows[statName].removeFromParent();
-            delete this._rows[statName];
+        statsToRemove.forEach(stat => {
+            this._rows.get(stat).removeFromParent();
+            this._rows.delete(stat);
         });
 
         this.refresh();
     }
 
     refresh() {
-        Object.values(this._rows).forEach(row => row.refresh());
+        this._rows.forEach((row, _) => { row.refresh(); });
 
         this._totalAttributesSpeciesElement.textContent = pipsToDice(this._character.Totals.AttributesSpecies);
         this._totalAttributesStartingElement.textContent = pipsToDice(this._character.Totals.AttributesStarting);
