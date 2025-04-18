@@ -5,11 +5,13 @@ import { View } from "./View.js";
 
 export class StatRow extends View {
     _stat = null;
-    _modifierRows = {};
+    _modifierRows = null;
 
     // Elements
     _nameLabel = null;
     _valueLabel = null;
+    _advancedTag = null;
+    _preBonusValueLabel = null;
 
     _renameButton = null;
     _nameEditContainer = null;
@@ -39,8 +41,13 @@ export class StatRow extends View {
         const [element, childMap] = Templates.instantiateWithChildMap("statRow");
         super(element);
 
+        this._modifierRows = new Map();
+
         this._nameLabel = this._element.querySelector(".stat-row__name-label");
         this._valueLabel = this._element.querySelector(".stat-row__value-label");
+
+        this._advancedTag = this._element.querySelector(".stat-row__advanced-tag");
+        this._preBonusValueLabel = this._element.querySelector(".stat-row__pre-bonus-value-label");
 
         this._buttonContainer = this._element.querySelector(".stat-row__buttons");
         this._renameButton = childMap.get("stat-row-rename-button");
@@ -65,9 +72,10 @@ export class StatRow extends View {
     }
 
     initialize(stat) {
+        this._stat = stat;
+
         super.initialize();
 
-        this._stat = stat;
         this._nameLabel.textContent = stat.Name;
 
         return this;
@@ -112,12 +120,17 @@ export class StatRow extends View {
     }
 
     refresh() {
-        if (this._stat.TotalWithBonus != this._stat.Total)
-            this._valueLabel.textContent = "(" + pipsToDice(this._stat.Total) + ") " + pipsToDice(this._stat.TotalWithBonus);
-        else
+        if (this._stat.TotalWithBonus != this._stat.Total) {
+            this._valueLabel.textContent = pipsToDice(this._stat.TotalWithBonus);
+            this._preBonusValueLabel.textContent = "(" + pipsToDice(this._stat.Total) + ")";
+            this._preBonusValueLabel.style.display = "block";
+        }
+        else {
             this._valueLabel.textContent = pipsToDice(this._stat.Total);
+            this._preBonusValueLabel.style.display = "";
+        }
 
-        Object.entries(this._modifierRows).forEach(([modifierName, row]) => {
+        this._modifierRows.forEach((row, modifierName) => {
             row.setValue(this._stat[modifierName]);
         });
     }
@@ -131,7 +144,7 @@ export class StatRow extends View {
         const row = new StatModifierRow().initialize(modifierName);
         row.onValueChange = (modifier, delta) => this._modifierChange(modifier, delta);
         this.appendChild(row, "modifier-container");
-        this._modifierRows[modifierName] = row;
+        this._modifierRows.set(modifierName, row);
     }
 
     _modifierChange(modifier, delta) {
@@ -261,6 +274,7 @@ export class AttributeRow extends StatRow {
 
     _setupEventListeners() {
         super._setupEventListeners();
+
         this._setupEventListenersAdd();
     }
 }
@@ -274,10 +288,8 @@ export class SkillRow extends StatRow {
     initialize(stat) {
         super.initialize(stat);
 
-        if (stat.Type === "AdvancedSkill") {
-            this._nameLabel.textContent = "(A) " + stat.Name;
+        if (stat.Type === "AdvancedSkill")
             this._advancedCheckbox.checked = true;
-        }
 
         this._addButton.textContent = `➕ Add Specialization`;
 
@@ -286,19 +298,20 @@ export class SkillRow extends StatRow {
 
     _setupEventListeners() {
         super._setupEventListeners();
-        this._setupEventListenersAdd();
-        this._setupEventListenersAdvancedSkill();
         this._setupEventListenersRename();
         this._setupEventListenersRemove();
+
+        this._setupEventListenersAdvancedSkill();
+        this._setupEventListenersAdd();
     }
 
     refresh() {
         super.refresh();
 
         if (this._stat.Type === "AdvancedSkill")
-            this._nameLabel.textContent = "(A) " + this._stat.Name;
+            this._advancedTag.style.display = "block";
         else
-            this._nameLabel.textContent = this._stat.Name;
+            this._advancedTag.style.display = "none";
     }
 }
 

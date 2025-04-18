@@ -23,13 +23,17 @@ body {
     width: 100%;
 }
 
-.collapse div {
+.collapse div:nth-child(2) {
     overflow: hidden;
 }
 
 body[mode="view"] .mode-view,
 body[mode="edit"] .mode-edit {
     grid-template-rows: min-content 1fr;
+}
+
+.flex-spacer {
+    flex-grow: 1;
 }
 
 .template-container {
@@ -303,14 +307,29 @@ button.stat-row__confirm-remove-button {
 }
 
 .stat-row__name-input--invalid {
-    /*border: 1px solid #ff0000;*/
     box-shadow: 1px 1px 5px #ff0000 inset;
     background-color: #ffdddd;
     color: #cc0000;
 }
 
-.stat-row__value-label {
-    margin-left: auto;
+.stat-row__advanced-tag {
+    display: none;
+    margin-top: 10pt;
+    margin-left: 10px;
+    color: #aaa;
+    font-weight: normal;
+    font-size: 12pt;
+    line-height: 12pt;
+}
+
+.stat-row__pre-bonus-value-label {
+    display: none;
+    margin-top: 6pt;
+    margin-right: 10px;
+    color: #aaa;
+    font-weight: normal;
+    font-size: 16pt;
+    line-height: 16pt;
 }
 
 /*** Widgets and modifier rows ***/
@@ -326,14 +345,14 @@ body[mode="edit"] .stat-row__middle-container {
 .stat-row__widget-container {
     display: flex;
     flex-direction: column;
-    width: 45%;
-}
-
-.stat-row__advanced-checkbox {
+    width: 40%;
+    height: 100%;
     font-weight: normal;
     font-size: 10pt;
     font-family: "Segoe UI";
+}
 
+.stat-row__widget__checkbox {
     & input {
         vertical-align: -2px;
     }
@@ -345,7 +364,7 @@ body[mode="edit"] .stat-row__middle-container {
 
 /*** Modifier rows ***/
 .stat-row__modifier-container {
-    width: 55%;
+    width: 60%;
 }
 
 /*** Sub stats ***/
@@ -376,21 +395,26 @@ button.stat-row__add-button {
 }
 
 .stat-modifier-row__name {
+    margin-top: auto;
     margin-right: 10px;
+    margin-bottom: auto;
     margin-left: auto;
     font-weight: normal;
     font-size: 10pt;
+    line-height: 10pt;
     font-family: "Segoe UI";
+    text-align: right;
 }
 
 .stat-modifier-row__value {
+    flex-shrink: 0;
     width: 6ch;
     font-weight: normal;
     font-size: 14pt;
-    text-align: right;
     text-align: center;
 }
 
 .stat-modifier-row button {
+    flex-shrink: 0;
     align-self: center;
 }
