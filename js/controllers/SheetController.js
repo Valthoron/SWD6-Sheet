@@ -1,6 +1,6 @@
-import { pipsToDice } from '../utils/formatters.js';
-import { AttributeRow, SkillRow, SpecRow } from './StatRow.js';
-import { View } from './View.js';
+import { pipsToDice } from "../utils/formatters.js";
+import { AttributeRow, SkillRow, SpecRow } from "./StatRow.js";
+import { View } from "./View.js";
 
 export class SheetController extends View {
     _character = null;
@@ -15,21 +15,28 @@ export class SheetController extends View {
     _totalDiceElement = null;
     _totalCharacterPointsElement = null;
 
-    constructor(character, nameLabel, sheetElement, statusBar) {
+    constructor(character, navBar, sheetElement, statusBar) {
         super(sheetElement);
 
         this._character = character;
 
         this._rows = new Map();
-        this._nameLabel = nameLabel;
+        this._nameLabel = navBar.querySelector("#nav-name-label");
+
+        this._renameButton = navBar.querySelector("#nav-rename-button");
+
+        this._nameEditContainer = navBar.querySelector(".navbar__character-name-edit");
+        this._nameInput = navBar.querySelector(".navbar__character-name-input");
+        this._nameSaveButton = navBar.querySelector("#nav-name-save-button");
+        this._nameRevertButton = navBar.querySelector("#nav-name-revert-button");
 
         // Statistics / totals
-        this._totalAttributesSpeciesElement = statusBar.querySelector('#stat-total-attributes-species');
-        this._totalAttributesStartingElement = statusBar.querySelector('#stat-total-attributes-starting');
-        this._totalSkillsElement = statusBar.querySelector('#stat-total-skills');
-        this._totalImprovementElement = statusBar.querySelector('#stat-total-improvement');
-        this._totalDiceElement = statusBar.querySelector('#stat-total-dice');
-        this._totalCharacterPointsElement = statusBar.querySelector('#stat-total-character-points');
+        this._totalAttributesSpeciesElement = statusBar.querySelector("#stat-total-attributes-species");
+        this._totalAttributesStartingElement = statusBar.querySelector("#stat-total-attributes-starting");
+        this._totalSkillsElement = statusBar.querySelector("#stat-total-skills");
+        this._totalImprovementElement = statusBar.querySelector("#stat-total-improvement");
+        this._totalDiceElement = statusBar.querySelector("#stat-total-dice");
+        this._totalCharacterPointsElement = statusBar.querySelector("#stat-total-character-points");
     }
 
     initialize() {
@@ -60,6 +67,61 @@ export class SheetController extends View {
         this._character.getStatsWithType("AdvancedSkill").forEach(skill => {
             this._createStatRow(SkillRow, skill);
         });
+    }
+
+    _setupEventListeners() {
+        super._setupEventListeners();
+
+        this._nameLabel.addEventListener("click", () => this._beginRename());
+        this._renameButton.addEventListener("click", () => this._beginRename());
+        this._nameSaveButton.addEventListener("click", () => this._saveName());
+        this._nameRevertButton.addEventListener("click", () => this._revertName());
+
+        this._nameInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                this._saveName();
+            } else if (event.key === "Escape") {
+                event.preventDefault();
+                this._revertName();
+            }
+        });
+    }
+
+    _beginRename() {
+        if (document.body.getAttribute("mode") === "view")
+            return;
+
+        this._nameInput.value = this._character.Name;
+        this._nameInput.setSelectionRange(-1, -1);
+
+        this._nameLabel.style.display = "none";
+        this._renameButton.style.display = "none";
+        this._nameEditContainer.style.display = "flex";
+
+        this._nameInput.focus();
+    }
+
+    _endRename() {
+        this._nameInput.value = this._character.Name;
+        this._nameInput.setSelectionRange(-1, -1);
+
+        this._nameLabel.style.display = "block";
+        this._renameButton.style.display = "";
+        this._nameEditContainer.style.display = "none";
+    }
+
+    _saveName() {
+        const newName = this._nameInput.value.trim();
+
+        this._nameLabel.textContent = newName;
+        this._character.Name = newName;
+
+        this._endRename();
+    }
+
+    _revertName() {
+        this._endRename();
     }
 
     _createStatRow(rowType, stat) {

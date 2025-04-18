@@ -20,6 +20,8 @@ export class Character {
     }
 
     get Name() { return this.#name; }
+    set Name(value) { this.#name = value; }
+
     get Stats() { return this.#stats; }
     get Totals() { return this.#totals; }
 

@@ -4,11 +4,11 @@ import { ModeHandler } from "./utils/ModeHandler.js";
 import { Templates } from "./utils/Templates.js";
 
 // TODO: These globals, sheet controller and sheet html are a mess right now
-
+// Considering multiple sheets with tabs
 let G_character = null;
 let G_modeHandler = null;
 let G_sheetController = null;
-let G_nameLabel = null;
+let G_navBar = null;
 let G_statView = null;
 let G_statusBar = null;
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     G_modeHandler = new ModeHandler().initialize();
 
-    G_nameLabel = document.getElementById("nav-name-label");
+    G_navBar = document.getElementById("navbar");
     G_statView = document.getElementById("stat-view");
     G_statusBar = document.getElementById("status-bar");
 
@@ -70,7 +70,7 @@ function setupElectron() {
 function loadSheet(character) {
     G_statView.innerHTML = "";
     G_character = character;
-    G_sheetController = new SheetController(G_character, G_nameLabel, G_statView, G_statusBar).initialize();
+    G_sheetController = new SheetController(G_character, G_navBar, G_statView, G_statusBar).initialize();
     G_modeHandler.switchMode("view");
 }
 
