@@ -248,7 +248,7 @@ export class AttributeRow extends StatRow {
     initialize(stat) {
         super.initialize(stat);
 
-        this._addButton.textContent = `➕ ${stat.Name} skill`;
+        this._addButton.textContent = `➕ Add Skill`;
 
         return this;
     }
@@ -279,7 +279,7 @@ export class SkillRow extends StatRow {
             this._advancedCheckbox.checked = true;
         }
 
-        this._addButton.textContent = `➕ ${stat.Name} specialization`;
+        this._addButton.textContent = `➕ Add Specialization`;
 
         return this;
     }
