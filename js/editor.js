@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const saveButton = document.getElementById("nav-action-save");
     saveButton.addEventListener("click", () => downloadCharacter());
 
+    document.body.addEventListener("contextmenu", (e) => { e.preventDefault(); });
+
     if (window.electron)
         setupElectron();
 

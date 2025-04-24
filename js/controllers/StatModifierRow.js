@@ -30,8 +30,29 @@ export class StatModifierRow extends View {
     }
 
     _setupEventListeners() {
-        this._decreaseButton.addEventListener("click", () => this._change(-1));
-        this._increaseButton.addEventListener("click", () => this._change(1));
+        this._decreaseButton.addEventListener("click", (event) => {
+            if (event.shiftKey)
+                this._change(-3);
+            else
+                this._change(-1);
+        });
+
+        this._increaseButton.addEventListener("click", (event) => {
+            if (event.shiftKey)
+                this._change(3);
+            else
+                this._change(1);
+        });
+
+        this._decreaseButton.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            this._change(-3);
+        });
+
+        this._increaseButton.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            this._change(3);
+        });
     }
 
     setValue(value) {
