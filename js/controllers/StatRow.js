@@ -327,10 +327,10 @@ export class SpecRow extends StatRow {
         this._setupEventListenersRename();
         this._setupEventListenersRemove();
 
-        this._startFromBaseButton.addEventListener("click", () => this._startFromBase());
+        this._startFromBaseButton.addEventListener("click", () => this.startFromBase());
     }
 
-    _startFromBase() {
+    startFromBase() {
         const baseSkill = this._stat.Character.getStat(this._stat.Base);
 
         this._stat.Starting = baseSkill.Starting + baseSkill.Improvement;

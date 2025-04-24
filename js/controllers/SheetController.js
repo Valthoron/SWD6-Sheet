@@ -193,6 +193,7 @@ export class SheetController extends View {
             });
 
             const row = this._createStatRow(SpecRow, stat);
+            row.startFromBase();
             row.beginRenameAndSelect();
         }
 
