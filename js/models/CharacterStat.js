@@ -7,8 +7,6 @@ export class CharacterStat {
     #name = "";
     #base = "";
 
-    #baseStarting = 0;
-
     #species = 0;
     #starting = 0;
     #bonus = 0;
@@ -23,8 +21,6 @@ export class CharacterStat {
         this.#name = data.Name;
         this.#type = data.Type;
         this.#base = data.Base || "";
-
-        this.#baseStarting = data.BaseStarting || 0;
 
         this.#species = data.Species || 0;
         this.#starting = data.Starting || 0;
@@ -42,9 +38,6 @@ export class CharacterStat {
 
     get Base() { return this.#base; }
     set Base(value) { this.#base = value; }
-
-    get BaseStarting() { return this.#baseStarting; }
-    set BaseStarting(value) { this.#baseStarting = value; }
 
     get Species() { return this.#species; }
     set Species(value) { this.#species = value; }
@@ -100,18 +93,12 @@ export class CharacterStat {
 
     #calculateSpecializationTotal() {
         // Spec on creation
-        // (attribute: species + starting + improvement) + (base: character) + starting
-
-        // Spec learned later
-        // (attribute: species + starting + improvement) + (base: character) + starting
+        // (attribute: species + starting + improvement) + starting
 
         const skill = this.#character.getStat(this.#base);
         const attribute = this.#character.getStat(skill.#base);
 
-        if (this.#baseStarting !== 0)
-            return (attribute.#species + attribute.#starting + attribute.#improvement) + (skill.#baseStarting) + this.#starting + this.#improvement;
-        else
-            return (attribute.#species + attribute.#starting + attribute.#improvement) + (skill.#starting) + this.#starting + this.#improvement;
+        return (attribute.#species + attribute.#starting + attribute.#improvement) + this.#starting + this.#improvement;
     }
 
     calculateCharacterPoints() {
@@ -158,7 +145,6 @@ export class CharacterStat {
         jsonAddNonZero(json, "Starting", this.#starting);
         jsonAddNonZero(json, "Improvement", this.#improvement);
         jsonAddNonZero(json, "Bonus", this.#bonus);
-        jsonAddNonZero(json, "BaseStarting", this.#baseStarting);
 
         return json;
     }

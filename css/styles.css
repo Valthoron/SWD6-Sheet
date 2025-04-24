@@ -196,7 +196,8 @@ body[mode="edit"] #nav-rename-button {
 }
 
 .stat-row--attribute> :not(.stat-row__stat-container) .stat-row__buttons,
-.stat-row--attribute> :not(.stat-row__stat-container) .stat-row__advanced-checkbox {
+.stat-row--attribute> :not(.stat-row__stat-container) .stat-row__advanced-checkbox,
+.stat-row--attribute> :not(.stat-row__stat-container) .stat-row__start-from-base-button {
     display: none;
 }
 
@@ -208,6 +209,10 @@ body[mode="edit"] #nav-rename-button {
 
 body[mode="edit"] .stat-row--skill .stat-row__name-label {
     cursor: text;
+}
+
+.stat-row--skill> :not(.stat-row__stat-container) .stat-row__start-from-base-button {
+    display: none;
 }
 
 .stat-row--spec .stat-row__name-label,
@@ -379,6 +384,12 @@ body[mode="edit"] .stat-row__middle-container {
 }
 
 button.stat-row__add-button {
+    width: fit-content;
+    font-size: 14px;
+    font-family: "Tw Cen MT";
+}
+
+button.stat-row__start-from-base-button {
     width: fit-content;
     font-size: 14px;
     font-family: "Tw Cen MT";

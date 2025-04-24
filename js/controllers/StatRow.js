@@ -29,6 +29,7 @@ export class StatRow extends View {
     _statContainer = null;
 
     _addButton = null;
+    _startFromBaseButton = null;
 
     // Events
     onNameChange = null;
@@ -69,6 +70,7 @@ export class StatRow extends View {
         this._registerContainer("stat-container", this._statContainer);
 
         this._addButton = this._element.querySelector(".stat-row__add-button");
+        this._startFromBaseButton = this._element.querySelector(".stat-row__start-from-base-button");
     }
 
     initialize(stat) {
@@ -113,10 +115,6 @@ export class StatRow extends View {
         this._removeButton.addEventListener("click", () => this._beginRemove());
         this._abortRemoveButton.addEventListener("click", () => this._abortRemove());
         this._confirmRemoveButton.addEventListener("click", () => this._confirmRemove());
-    }
-
-    _setupEventListenersAdvancedSkill() {
-        this._advancedCheckbox.addEventListener("change", () => this._toggleAdvancedSkill());
     }
 
     refresh() {
@@ -226,11 +224,6 @@ export class StatRow extends View {
         this._endRename();
     }
 
-    _toggleAdvancedSkill() {
-        const newType = this._advancedCheckbox.checked ? "AdvancedSkill" : "Skill";
-        this.onTypeChange?.(newType);
-    }
-
     _addStat() {
         this.onAddStat?.();
     }
@@ -298,11 +291,13 @@ export class SkillRow extends StatRow {
 
     _setupEventListeners() {
         super._setupEventListeners();
+
         this._setupEventListenersRename();
         this._setupEventListenersRemove();
 
-        this._setupEventListenersAdvancedSkill();
         this._setupEventListenersAdd();
+
+        this._advancedCheckbox.addEventListener("change", () => this._toggleAdvancedSkill());
     }
 
     refresh() {
@@ -312,6 +307,11 @@ export class SkillRow extends StatRow {
             this._advancedTag.style.display = "block";
         else
             this._advancedTag.style.display = "none";
+    }
+
+    _toggleAdvancedSkill() {
+        const newType = this._advancedCheckbox.checked ? "AdvancedSkill" : "Skill";
+        this.onTypeChange?.(newType);
     }
 }
 
@@ -323,7 +323,19 @@ export class SpecRow extends StatRow {
 
     _setupEventListeners() {
         super._setupEventListeners();
+
         this._setupEventListenersRename();
         this._setupEventListenersRemove();
+
+        this._startFromBaseButton.addEventListener("click", () => this._startFromBase());
+    }
+
+    _startFromBase() {
+        const baseSkill = this._stat.Character.getStat(this._stat.Base);
+
+        this._stat.Starting = baseSkill.Starting + baseSkill.Improvement;
+
+        this._stat.Character.calculate();
+        this.refresh();
     }
 }
