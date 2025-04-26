@@ -67,6 +67,8 @@ function setupElectron() {
     window.addEventListener("beforeunload", () => {
         window.electron.removeAllListeners();
     });
+
+    document.documentElement.classList.add("electron");
 }
 
 function loadSheet(character) {

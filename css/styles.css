@@ -16,6 +16,14 @@ body {
     box-shadow: inset 0px 0px 0px 1px #f00;
 }*/
 
+.electron .electron-only {
+    display: block;
+}
+
+.electron .browser-only {
+    display: none;
+}
+
 .collapse {
     display: grid;
     grid-template-rows: min-content 0fr;
