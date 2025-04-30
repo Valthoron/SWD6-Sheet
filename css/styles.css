@@ -36,7 +36,8 @@ body {
 }
 
 body[mode="view"] .mode-view,
-body[mode="edit"] .mode-edit {
+body[mode="advance"] .mode-advance,
+body[mode="create"] .mode-create {
     grid-template-rows: min-content 1fr;
 }
 
@@ -72,7 +73,7 @@ body[mode="edit"] .mode-edit {
     font-size: 26pt;
 }
 
-body[mode="edit"] .navbar__character-name-label {
+body[mode="create"] .navbar__character-name-label {
     cursor: text;
 }
 
@@ -85,17 +86,17 @@ body[mode="edit"] .navbar__character-name-label {
 }
 
 #nav-rename-button {
-    display: none;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
-body[mode="edit"] #nav-rename-button {
-    display: block;
+body[mode="create"] #nav-rename-button {
+    opacity: 1;
 }
 
 #nav-rename-button,
 .navbar__character-name-edit button {
     vertical-align: 2px;
-    transition: opacity 0.2s;
     border: 0px;
     background-color: rgb(255, 140, 0);
     padding-top: 0.25em;
@@ -215,7 +216,8 @@ body[mode="edit"] #nav-rename-button {
     font-size: 18pt;
 }
 
-body[mode="edit"] .stat-row--skill .stat-row__name-label {
+body[mode="advance"] .stat-row--skill .stat-row__name-label,
+body[mode="create"] .stat-row--skill .stat-row__name-label {
     cursor: text;
 }
 
@@ -230,7 +232,8 @@ body[mode="edit"] .stat-row--skill .stat-row__name-label {
     font-size: 16pt;
 }
 
-body[mode="edit"] .stat-row--spec .stat-row__name-label {
+body[mode="advance"] .stat-row--spec .stat-row__name-label,
+body[mode="create"] .stat-row--spec .stat-row__name-label {
     cursor: text;
 }
 
@@ -276,7 +279,8 @@ body[mode="edit"] .stat-row--spec .stat-row__name-label {
     height: 0px;
 }
 
-body[mode="edit"] .stat-row__buttons {
+body[mode="advance"] .stat-row__buttons,
+body[mode="create"] .stat-row__buttons {
     opacity: 1;
     height: 100%;
 }
@@ -351,7 +355,8 @@ button.stat-row__confirm-remove-button {
     width: 100%;
 }
 
-body[mode="edit"] .stat-row__middle-container {
+body[mode="advance"] .stat-row__middle-container,
+body[mode="create"] .stat-row__middle-container {
     margin-bottom: 5px;
 }
 
@@ -398,9 +403,14 @@ button.stat-row__add-button {
 }
 
 button.stat-row__start-from-base-button {
+    transition: opacity 0.2s;
     width: fit-content;
     font-size: 14px;
     font-family: "Tw Cen MT";
+}
+
+body:not([mode="create"]) button.stat-row__start-from-base-button {
+    opacity: 0;
 }
 
 /*
@@ -411,6 +421,11 @@ button.stat-row__start-from-base-button {
     transition: height 0.2s, opacity 0.2s;
     width: 100%;
     height: 36px;
+}
+
+body:not([mode="create"]) .stat-modifier-row__create-only {
+    opacity: 0;
+    height: 0px;
 }
 
 .stat-modifier-row__name {

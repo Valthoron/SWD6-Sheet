@@ -6,6 +6,10 @@ export class View {
     _parent = null;
     _children = {};
 
+    get Element() { return this._element; }
+    get Parent() { return this._parent; }
+    get Children() { return this._children; }
+
     constructor(element) {
         this._element = element;
     }

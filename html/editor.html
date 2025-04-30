@@ -12,7 +12,7 @@
 <body>
     <!-- Navbar -->
     <div id="navbar" class="navbar">
-        <div id="nav-name-label" class="navbar__character-name-label"></div>
+        <div id="nav-name-label" class="navbar__character-name-label mode-advance mode-create"></div>
         <button id="nav-rename-button">✏️</button>
         <div class="navbar__character-name-edit">
             <input type="text" class="navbar__character-name-input">
@@ -22,7 +22,8 @@
         <div class="navbar__button-container">
             <div class="navbar__button-group">
                 <button id="nav-mode-view" class="navbar__button">View</button>
-                <button id="nav-mode-edit" class="navbar__button">Edit</button>
+                <button id="nav-mode-advance" class="navbar__button">Advance</button>
+                <button id="nav-mode-create" class="navbar__button">Create</button>
             </div>
             <div class="navbar__button-group browser-only">
                 <button id="nav-action-new" class="navbar__button">New</button>
@@ -75,7 +76,7 @@
                 <div class="stat-row__value-label">0D</div>
             </div>
 
-            <div class="collapse mode-edit">
+            <div class="collapse mode-advance mode-create">
                 <div><!-- .collapse requires this empty div --></div>
                 <div class="stat-row__middle-container">
                     <div class="stat-row__widget-container">

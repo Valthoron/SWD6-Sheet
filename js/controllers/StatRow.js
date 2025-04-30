@@ -84,9 +84,9 @@ export class StatRow extends View {
     }
 
     _initializeChildViews() {
-        this._createModifierRow("Starting");
+        this._createModifierRow("Starting").Element.classList.add("stat-modifier-row__create-only");
         this._createModifierRow("Improvement");
-        this._createModifierRow("Bonus");
+        this._createModifierRow("Bonus").Element.classList.add("stat-modifier-row__create-only");
     }
 
     _setupEventListenersAdd() {
@@ -143,6 +143,7 @@ export class StatRow extends View {
         row.onValueChange = (modifier, delta) => this._modifierChange(modifier, delta);
         this.appendChild(row, "modifier-container");
         this._modifierRows.set(modifierName, row);
+        return row;
     }
 
     _modifierChange(modifier, delta) {
@@ -260,7 +261,7 @@ export class AttributeRow extends StatRow {
     }
 
     _initializeChildViews() {
-        this._createModifierRow("Species");
+        this._createModifierRow("Species").Element.classList.add("stat-modifier-row__create-only");;
 
         super._initializeChildViews();
     }

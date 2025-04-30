@@ -6,7 +6,8 @@ export class ModeHandler {
     constructor() {
         this.#buttons = {
             "view": document.getElementById("nav-mode-view"),
-            "edit": document.getElementById("nav-mode-edit"),
+            "advance": document.getElementById("nav-mode-advance"),
+            "create": document.getElementById("nav-mode-create"),
         };
 
         Object.entries(this.#buttons).forEach(([name, button]) => {
