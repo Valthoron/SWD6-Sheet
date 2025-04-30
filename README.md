@@ -4,11 +4,11 @@ A character sheet manager for the Star Wars D6 roleplaying game system by West E
 [![CodeFactor](https://www.codefactor.io/repository/github/valthoron/swd6-sheet/badge)](https://www.codefactor.io/repository/github/valthoron/swd6-sheet)
 
 ## Installation
-## Notice on Fonts
+### Notice on Fonts
 The sheet currently uses the fonts "Tw Cen MT" and "Segoe UI", that cannot be distributed as part of this repository. You will need to have these fonts installed in your system or put them in the `fonts` directory, and modify `css/fonts.css` accordingly. The sheet layout may be incorrect without them.
 
 ### Option 1: Run as desktop application
-Install dependencies and run:
+You need Node.js. Install dependencies and run:
 ```bash
 npm install
 npm start
@@ -21,7 +21,6 @@ The app will be available under the `dist` directory.
 
 ### Option 2: Run in browser
 Host the app locally, using Node.js or Python:
-
 ```bash
 # Node.js
 npx http-server -p 8080
@@ -30,7 +29,6 @@ npx http-server -p 8080
 # Python 3
 python -m http.server 8080
 ```
-
 Then open your browser to http://localhost:8080/html/editor.html. Change the port number to anything else if it's occupied on your machine.
 
 ## Licensing
