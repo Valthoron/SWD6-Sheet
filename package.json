@@ -1,29 +1,16 @@
 {
     "name": "swd6-sheet",
-    "version": "0.1.0",
     "description": "Star Wars D6 Character Sheet",
+    "version": "0.1.0",
+    "author": "Serdar Üşenmez",
+    "homepage": "https://github.com/Valthoron/SWD6-Sheet",
+    "license": "GPL-3.0-or-later",
     "main": "js/electronMain.js",
     "type": "module",
     "scripts": {
         "start": "electron .",
-        "build": "electron-builder",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "electron-builder"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Valthoron/SWD6-Sheet-Web.git"
-    },
-    "keywords": [
-        "star-wars",
-        "rpg",
-        "character-sheet"
-    ],
-    "author": "Serdar Üşenmez",
-    "license": "GPL-3.0-or-later",
-    "bugs": {
-        "url": "https://github.com/Valthoron/SWD6-Sheet-Web/issues"
-    },
-    "homepage": "https://github.com/Valthoron/SWD6-Sheet-Web#readme",
     "devDependencies": {
         "electron": "^35.1.5",
         "electron-builder": "^26.0.12"
