@@ -44,13 +44,14 @@
             "!**/{.DS_Store,thumbs.db}"
         ],
         "mac": {
-            "category": "public.app-category.utilities"
+            "category": "public.app-category.utilities",
+            "target": "zip"
         },
         "win": {
-            "target": "nsis"
+            "target": "portable"
         },
         "linux": {
-            "target": "AppImage"
+            "target": "dir"
         }
     }
 }
