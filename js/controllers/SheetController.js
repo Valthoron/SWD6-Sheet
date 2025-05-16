@@ -93,7 +93,7 @@ export class SheetController extends View {
             return;
 
         this._nameInput.value = this._character.Name;
-        this._nameInput.setSelectionRange(-1, -1);
+        this._nameInput.select();
 
         this._nameLabel.style.display = "none";
         this._renameButton.style.display = "none";

@@ -183,7 +183,7 @@ export class StatRow extends View {
             return;
 
         this._nameInput.value = this._stat.Name;
-        this._nameInput.setSelectionRange(-1, -1);
+        this._nameInput.select();
 
         this._nameLabel.style.display = "none";
         this._buttonContainer.style.display = "none";
