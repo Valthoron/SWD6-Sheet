@@ -128,12 +128,12 @@ export class Character {
             Name: "(Unnamed Character)",
             Stats: [
                 // Attributes
-                { Name: "Dexterity", Type: "Attribute", Starting: 6 },
-                { Name: "Knowledge", Type: "Attribute", Starting: 6 },
-                { Name: "Mechanical", Type: "Attribute", Starting: 6 },
-                { Name: "Perception", Type: "Attribute", Starting: 6 },
-                { Name: "Strength", Type: "Attribute", Starting: 6 },
-                { Name: "Technical", Type: "Attribute", Starting: 6 }
+                { Name: "Dexterity", Type: "Attribute", Species: 6, Starting: 3 },
+                { Name: "Knowledge", Type: "Attribute", Species: 6, Starting: 3 },
+                { Name: "Mechanical", Type: "Attribute", Species: 6, Starting: 3 },
+                { Name: "Perception", Type: "Attribute", Species: 6, Starting: 3 },
+                { Name: "Strength", Type: "Attribute", Species: 6, Starting: 3 },
+                { Name: "Technical", Type: "Attribute", Species: 6, Starting: 3 }
             ]
         };
 
